@@ -13,6 +13,11 @@
 		1842C5C51C0EFF5300E6D6EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1842C5C31C0EFF5300E6D6EE /* Main.storyboard */; };
 		1842C5C71C0EFF5300E6D6EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1842C5C61C0EFF5300E6D6EE /* Assets.xcassets */; };
 		1842C5CA1C0EFF5300E6D6EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1842C5C81C0EFF5300E6D6EE /* LaunchScreen.storyboard */; };
+		1842C5D61C0F079E00E6D6EE /* DMNetworkHelperManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5D31C0F079E00E6D6EE /* DMNetworkHelperManager.m */; };
+		1842C5D71C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5D51C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m */; };
+		1842C5DB1C0F0A9200E6D6EE /* SimpleLoadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5DA1C0F0A9200E6D6EE /* SimpleLoadTask.m */; };
+		1842C5DE1C0F0AA600E6D6EE /* SimpleNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5DD1C0F0AA600E6D6EE /* SimpleNetworkHelper.m */; };
+		1842C5E51C0F0C8D00E6D6EE /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5E41C0F0C8D00E6D6EE /* SettingsManager.m */; };
 		24034B5CF0EAA5703D0E1A4D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37691D469C1F8D9B1DC4E18F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +32,16 @@
 		1842C5C61C0EFF5300E6D6EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1842C5C91C0EFF5300E6D6EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1842C5CB1C0EFF5300E6D6EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1842C5D21C0F079E00E6D6EE /* DMNetworkHelperManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperManager.h; sourceTree = "<group>"; };
+		1842C5D31C0F079E00E6D6EE /* DMNetworkHelperManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperManager.m; sourceTree = "<group>"; };
+		1842C5D41C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperTaskOperation.h; sourceTree = "<group>"; };
+		1842C5D51C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperTaskOperation.m; sourceTree = "<group>"; };
+		1842C5D91C0F0A9200E6D6EE /* SimpleLoadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleLoadTask.h; sourceTree = "<group>"; };
+		1842C5DA1C0F0A9200E6D6EE /* SimpleLoadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleLoadTask.m; sourceTree = "<group>"; };
+		1842C5DC1C0F0AA600E6D6EE /* SimpleNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleNetworkHelper.h; sourceTree = "<group>"; };
+		1842C5DD1C0F0AA600E6D6EE /* SimpleNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleNetworkHelper.m; sourceTree = "<group>"; };
+		1842C5E31C0F0C8D00E6D6EE /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
+		1842C5E41C0F0C8D00E6D6EE /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
 		37691D469C1F8D9B1DC4E18F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4EA70375CAED812688C91ED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD5C952F61B10BCD48CA9097 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -47,6 +62,7 @@
 		1842C5AE1C0EFF5200E6D6EE = {
 			isa = PBXGroup;
 			children = (
+				1842C5D11C0F079E00E6D6EE /* classes */,
 				1842C5B91C0EFF5300E6D6EE /* DMNetworkHelper */,
 				1842C5B81C0EFF5300E6D6EE /* Products */,
 				56F3B76E64A2CD79A75EFBEE /* Pods */,
@@ -65,6 +81,7 @@
 		1842C5B91C0EFF5300E6D6EE /* DMNetworkHelper */ = {
 			isa = PBXGroup;
 			children = (
+				1842C5D81C0F0A6400E6D6EE /* networkHelper */,
 				1842C5BD1C0EFF5300E6D6EE /* AppDelegate.h */,
 				1842C5BE1C0EFF5300E6D6EE /* AppDelegate.m */,
 				1842C5C01C0EFF5300E6D6EE /* ViewController.h */,
@@ -73,6 +90,7 @@
 				1842C5C61C0EFF5300E6D6EE /* Assets.xcassets */,
 				1842C5C81C0EFF5300E6D6EE /* LaunchScreen.storyboard */,
 				1842C5CB1C0EFF5300E6D6EE /* Info.plist */,
+				1842C5DF1C0F0C6400E6D6EE /* managers */,
 				1842C5BA1C0EFF5300E6D6EE /* Supporting Files */,
 			);
 			path = DMNetworkHelper;
@@ -84,6 +102,37 @@
 				1842C5BB1C0EFF5300E6D6EE /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1842C5D11C0F079E00E6D6EE /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				1842C5D21C0F079E00E6D6EE /* DMNetworkHelperManager.h */,
+				1842C5D31C0F079E00E6D6EE /* DMNetworkHelperManager.m */,
+				1842C5D41C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.h */,
+				1842C5D51C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m */,
+			);
+			path = classes;
+			sourceTree = "<group>";
+		};
+		1842C5D81C0F0A6400E6D6EE /* networkHelper */ = {
+			isa = PBXGroup;
+			children = (
+				1842C5D91C0F0A9200E6D6EE /* SimpleLoadTask.h */,
+				1842C5DA1C0F0A9200E6D6EE /* SimpleLoadTask.m */,
+				1842C5DC1C0F0AA600E6D6EE /* SimpleNetworkHelper.h */,
+				1842C5DD1C0F0AA600E6D6EE /* SimpleNetworkHelper.m */,
+			);
+			path = networkHelper;
+			sourceTree = "<group>";
+		};
+		1842C5DF1C0F0C6400E6D6EE /* managers */ = {
+			isa = PBXGroup;
+			children = (
+				1842C5E31C0F0C8D00E6D6EE /* SettingsManager.h */,
+				1842C5E41C0F0C8D00E6D6EE /* SettingsManager.m */,
+			);
+			path = managers;
 			sourceTree = "<group>";
 		};
 		56F3B76E64A2CD79A75EFBEE /* Pods */ = {
@@ -225,6 +274,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1842C5C21C0EFF5300E6D6EE /* ViewController.m in Sources */,
+				1842C5E51C0F0C8D00E6D6EE /* SettingsManager.m in Sources */,
+				1842C5D61C0F079E00E6D6EE /* DMNetworkHelperManager.m in Sources */,
+				1842C5DE1C0F0AA600E6D6EE /* SimpleNetworkHelper.m in Sources */,
+				1842C5DB1C0F0A9200E6D6EE /* SimpleLoadTask.m in Sources */,
+				1842C5D71C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m in Sources */,
 				1842C5BF1C0EFF5300E6D6EE /* AppDelegate.m in Sources */,
 				1842C5BC1C0EFF5300E6D6EE /* main.m in Sources */,
 			);
