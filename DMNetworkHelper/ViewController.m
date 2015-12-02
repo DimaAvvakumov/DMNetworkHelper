@@ -72,6 +72,16 @@
     DM_NHM_SharedInstance.protocol = self.protTextField.text;
     DM_NHM_SharedInstance.host = self.hostTextField.text;
     DM_NHM_SharedInstance.port = self.portTextField.text;
+    
+    // AFManager
+    AFHTTPRequestOperationManager *requestManager = [DM_NHM_SharedInstance operationManager];
+    
+    // bind auth credential
+    NSString *username = @"";
+    NSString *password = @"";
+    NSURLCredential *credential = [[NSURLCredential alloc] initWithUser:username password:password persistence:NSURLCredentialPersistenceForSession];
+    [requestManager setCredential:credential];
+    
 }
 
 - (void)startOperation {
