@@ -1,4 +1,4 @@
-//
+po //
 //  ViewController.m
 //  DMNetworkHelper
 //
@@ -26,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *portTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pathTextField;
 
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
@@ -41,6 +44,9 @@
     self.hostTextField.text = [SettingsManager defaultManager].serverHost;
     self.portTextField.text = [SettingsManager defaultManager].serverPort;
     self.pathTextField.text = [SettingsManager defaultManager].serverPath;
+    
+    self.usernameTextField.text = [SettingsManager defaultManager].username;
+    self.passwordTextField.text = [SettingsManager defaultManager].password;
     
 }
 
@@ -65,6 +71,9 @@
     [SettingsManager defaultManager].serverPort = self.portTextField.text;
     [SettingsManager defaultManager].serverPath = self.pathTextField.text;
     
+    [SettingsManager defaultManager].username = self.usernameTextField.text;
+    [SettingsManager defaultManager].password = self.passwordTextField.text;
+    
     [[SettingsManager defaultManager] save];
 }
 
@@ -77,8 +86,8 @@
     AFHTTPRequestOperationManager *requestManager = [DM_NHM_SharedInstance operationManager];
     
     // bind auth credential
-    NSString *username = @"";
-    NSString *password = @"";
+    NSString *username = self.usernameTextField.text;
+    NSString *password = self.passwordTextField.text;
     NSURLCredential *credential = [[NSURLCredential alloc] initWithUser:username password:password persistence:NSURLCredentialPersistenceForSession];
     [requestManager setCredential:credential];
     
@@ -103,9 +112,7 @@
             message = [NSString stringWithFormat:@"%@", items];
         }
         
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            weakSelf.textView.text = message;
-        });
+        weakSelf.textView.text = message;
         
         NSLog(@"Items downloaded: %lu", (unsigned long)[items count]);
     }];

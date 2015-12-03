@@ -44,6 +44,9 @@
     self.serverPort = [userDefaults stringForKey:@"Server_Port"];
     self.serverPath = [userDefaults stringForKey:@"Server_Path"];
     
+    self.username = [userDefaults stringForKey:@"Username"];
+    self.password = [userDefaults stringForKey:@"Password"];
+    
 }
 
 - (void)save {
@@ -60,6 +63,12 @@
     }
     if (self.serverPath) {
         [userDefaults setObject:self.serverPath forKey:@"Server_Path"];
+    }
+    if (self.username) {
+        [userDefaults setObject:self.username forKey:@"Username"];
+    }
+    if (self.password) {
+        [userDefaults setObject:self.password forKey:@"Password"];
     }
     
     [userDefaults synchronize];

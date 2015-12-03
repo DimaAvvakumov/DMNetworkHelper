@@ -105,7 +105,9 @@
         NSError *error = [NSError errorWithDomain:DM_NHM_SharedInstance.host code:-1 userInfo:userInfo];
         
         if (_finishBlock) {
-            _finishBlock(nil, error);
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                _finishBlock(nil, error);
+            });
         }
         
         [self finish];
@@ -130,7 +132,9 @@
     }
     
     if (_finishBlock) {
-        _finishBlock(items, nil);
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            _finishBlock(items, nil);
+        });
     }
     
     [self finish];
@@ -142,7 +146,9 @@
 
 - (void)afterFailureResponse:(NSError *)error {
     if (_finishBlock) {
-        _finishBlock(nil, error);
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            _finishBlock(nil, error);
+        });
     }
     
     [self finish];

@@ -17,6 +17,9 @@
 @property (strong, nonatomic) NSString *serverPort;
 @property (strong, nonatomic) NSString *serverPath;
 
+@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *password;
+
 - (void)save;
 
 @end
