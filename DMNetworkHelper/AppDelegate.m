@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import <MagicalRecord/MagicalRecord.h>
+
 @interface AppDelegate ()
 
 @end
@@ -16,7 +18,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    // Magical record
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelError];
+    // [self setupTriggering];
+    [MagicalRecord setupAutoMigratingCoreDataStack];
+    
     return YES;
 }
 

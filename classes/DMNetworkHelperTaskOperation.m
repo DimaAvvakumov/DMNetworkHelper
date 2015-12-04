@@ -8,6 +8,7 @@
 
 // frameworks
 #import <AFNetworking/AFNetworking.h>
+#import <MagicalRecord/MagicalRecord.h>
 
 #import "DMNetworkHelperManager.h"
 #import "DMNetworkHelperTaskOperation.h"
@@ -16,6 +17,8 @@
     BOOL _isExecuting;
     BOOL _isFinished;
 }
+
+@property (strong, nonatomic) NSManagedObjectContext *localContext;
 
 @property (copy, nonatomic) DMNetworkHelperListTaskFinishBlock finishBlock;
 
@@ -119,19 +122,33 @@
     
     NSInteger itemsCount = [itemsJson count];
     NSMutableArray *items = nil;
+    BOOL databaseIsUsing = [self databaseIsUsing];
+    
+    if (databaseIsUsing) {
+        NSManagedObjectContext *savingContext = [NSManagedObjectContext MR_rootSavingContext];
+        self.localContext = [NSManagedObjectContext MR_contextWithParent:savingContext];
+    }
     
     if (itemsCount > 0) {
         items = [NSMutableArray arrayWithCapacity:itemsCount];
         
         for (NSDictionary *itemInfo in itemsJson) {
             
-            id item = [self parseItem:itemInfo];
+            id item = nil;
+            if (databaseIsUsing) {
+                item = [self parseItem:itemInfo];
+            } else {
+                item = [self parseItem:itemInfo inLocalContext:self.localContext];
+            }
             
             if (item) {
                 [items addObject:item];
             }
         }
     }
+    
+    // save context
+    [self.localContext MR_saveToPersistentStoreAndWait];
     
     if (_finishBlock) {
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -202,6 +219,14 @@
 
 - (id)parseItem:(NSDictionary *)itemInfo {
     return nil;
+}
+
+- (id)parseItem:(NSDictionary *)itemInfo inLocalContext:(NSManagedObjectContext *)localContext {
+    return nil;
+}
+
+- (BOOL)databaseIsUsing {
+    return YES;
 }
 
 #pragma mark - Helper

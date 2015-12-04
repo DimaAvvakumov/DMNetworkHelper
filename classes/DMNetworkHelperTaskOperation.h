@@ -32,7 +32,9 @@ typedef enum {
 - (NSString *)path;
 - (DMNetworkHelperTaskMethod) method;
 - (NSString *)itemsKey;
+- (BOOL)databaseIsUsing;
 
 - (id)parseItem:(NSDictionary *)itemInfo;
+- (id)parseItem:(NSDictionary *)itemInfo inLocalContext:(NSManagedObjectContext *)localContext;
 
 @end
