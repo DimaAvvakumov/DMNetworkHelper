@@ -68,13 +68,8 @@
 
 - (NSString *)requestURLByAppendPath:(NSString *)path {
     
-    NSString *protocol = (self.protocol) ? self.protocol : @"http";
-    NSString *host = (self.host) ? self.host : @"localhost";
-    NSString *port = (self.port) ? [NSString stringWithFormat:@":%@", self.port] : @"";
-    NSString *appendPrefix = (self.pathPrefix) ? [NSString stringWithFormat:@"%@/", self.pathPrefix] : @"";
-    NSString *appendSuffix = (self.pathSuffix) ? self.pathSuffix : @"";
-    
-    return [NSString stringWithFormat:@"%@://%@%@/%@%@%@", protocol, host, port, appendPrefix, path, appendSuffix];
+    NSString *url = (self.url) ? self.url : @"localhost";
+    return [NSString stringWithFormat:@"%@/%@", url, path];
 }
 
 @end

@@ -13,12 +13,7 @@
 
 @interface DMNetworkHelperManager : NSObject
 
-@property (strong, nonatomic) NSString *protocol;
-@property (strong, nonatomic) NSString *host;
-@property (strong, nonatomic) NSString *port;
-
-@property (strong, nonatomic) NSString *pathPrefix;
-@property (strong, nonatomic) NSString *pathSuffix;
+@property (strong, nonatomic) NSString *url;
 
 // shared instance
 + (instancetype)sharedInstance;

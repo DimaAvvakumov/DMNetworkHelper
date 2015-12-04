@@ -78,9 +78,8 @@
 }
 
 - (void)applySettings {
-    DM_NHM_SharedInstance.protocol = self.protTextField.text;
-    DM_NHM_SharedInstance.host = self.hostTextField.text;
-    DM_NHM_SharedInstance.port = self.portTextField.text;
+    NSString *url = [NSString stringWithFormat:@"%@://%@:%@", self.protTextField.text, self.hostTextField.text, self.portTextField.text];
+    DM_NHM_SharedInstance.url = url;
     
     // AFManager
     AFHTTPRequestOperationManager *requestManager = [DM_NHM_SharedInstance operationManager];

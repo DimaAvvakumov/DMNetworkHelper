@@ -25,6 +25,10 @@ typedef enum {
 
 @interface DMNetworkHelperTaskOperation : NSOperation
 
+#pragma mark - params
+
+@property (strong, nonatomic) id params;
+
 - (void)executeWithCompletitionBlock:(DMNetworkHelperListTaskFinishBlock)finishBlock;
 
 #pragma mark - method for rewrite

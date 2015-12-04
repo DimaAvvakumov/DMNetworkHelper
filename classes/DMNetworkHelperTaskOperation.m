@@ -33,8 +33,6 @@
         return;
     }
     
-    [self printThread];
-    
     // performing request
     AFHTTPRequestOperationManager *manager = [DMNetworkHelperManager sharedInstance].operationManager;
     
@@ -55,7 +53,7 @@
     // weak self
     __weak typeof (self) weakSelf = self;
 
-    NSMutableURLRequest *request = [requestSerializer requestWithMethod:method URLString:requestURL parameters:nil error:nil];
+    NSMutableURLRequest *request = [requestSerializer requestWithMethod:method URLString:requestURL parameters:self.params error:nil];
     AFHTTPRequestOperation *operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = responseObject;
         
@@ -107,7 +105,7 @@
     
     if (itemsJson == nil || NO == [itemsJson isKindOfClass:[NSArray class]]) {
         NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: @"Wrong server response" };
-        NSError *error = [NSError errorWithDomain:DM_NHM_SharedInstance.host code:-1 userInfo:userInfo];
+        NSError *error = [NSError errorWithDomain:DM_NHM_SharedInstance.url code:-1 userInfo:userInfo];
         
         if (_finishBlock) {
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -180,15 +178,8 @@
     _isExecuting = NO;
     _isFinished = YES;
     
-    NSLog(@"Operation %p finished!", self);
-    
     [self didChangeValueForKey:@"isExecuting"];
     [self didChangeValueForKey:@"isFinished"];
-}
-
-- (void)printThread {
-    NSString *isMain = ([NSThread isMainThread]) ? @"is main" : @"background";
-    NSLog(@"Thread: %p %@", [NSThread currentThread], isMain);
 }
 
 - (BOOL)isFinished {
