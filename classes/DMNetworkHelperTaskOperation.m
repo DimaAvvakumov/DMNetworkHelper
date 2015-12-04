@@ -39,10 +39,12 @@
     manager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     // request serializer
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-    
-    // bind
-    manager.requestSerializer = requestSerializer;
+    AFHTTPRequestSerializer *requestSerializer = manager.requestSerializer;
+    if (requestSerializer == nil) {
+        requestSerializer = [AFHTTPRequestSerializer serializer];
+        
+        manager.requestSerializer = requestSerializer;
+    }
     
     NSString *requestURL = [DM_NHM_SharedInstance requestURLByAppendPath:[self path]];
     NSString *method = [self methodString];

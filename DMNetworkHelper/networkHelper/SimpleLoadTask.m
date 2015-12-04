@@ -28,7 +28,7 @@
 
 - (id)parseItem:(NSDictionary *)itemInfo {
     
-    return [itemInfo objectForKey:@"id"];
+    return itemInfo;
 }
 
 @end

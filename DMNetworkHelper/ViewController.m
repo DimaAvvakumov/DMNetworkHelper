@@ -1,4 +1,4 @@
-po //
+//
 //  ViewController.m
 //  DMNetworkHelper
 //
@@ -84,6 +84,11 @@ po //
     
     // AFManager
     AFHTTPRequestOperationManager *requestManager = [DM_NHM_SharedInstance operationManager];
+    
+    // Request serializer
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    requestManager.requestSerializer = requestSerializer;
     
     // bind auth credential
     NSString *username = self.usernameTextField.text;
