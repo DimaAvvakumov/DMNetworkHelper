@@ -134,9 +134,9 @@
             
             id item = nil;
             if (databaseIsUsing) {
-                item = [self parseItem:itemInfo];
-            } else {
                 item = [self parseItem:itemInfo inLocalContext:self.localContext];
+            } else {
+                item = [self parseItem:itemInfo];
             }
             
             if (item) {
