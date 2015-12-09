@@ -47,7 +47,10 @@
         manager.requestSerializer = requestSerializer;
     }
     
-    NSString *requestURL = [DM_NHM_SharedInstance requestURLByAppendPath:[self path]];
+    NSString *requestURL = [self absolutePath];
+    if (requestURL == nil) {
+        requestURL = [DM_NHM_SharedInstance requestURLByAppendPath:[self path]];
+    }
     NSString *method = [self methodString];
     
     // weak self
@@ -197,6 +200,10 @@
 
 - (DMNetworkHelperTaskResponseType)responseType {
     return DMNetworkHelperTaskResponseType_List;
+}
+
+- (NSString *)absolutePath {
+    return nil;
 }
 
 - (NSString *)path {

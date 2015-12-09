@@ -33,6 +33,7 @@ typedef enum {
 
 #pragma mark - method for rewrite
 - (DMNetworkHelperTaskResponseType)responseType;
+- (NSString *)absolutePath;
 - (NSString *)path;
 - (DMNetworkHelperTaskMethod) method;
 - (NSString *)itemsKey;
