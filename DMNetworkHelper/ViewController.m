@@ -106,7 +106,7 @@
     // weak self
     __weak typeof (self) weakSelf = self;
     
-    self.operation = [self.networkHelper nh_simpleLoadWithFinishBlock:^(NSArray *items, NSError *error) {
+    self.operation = [self.networkHelper nh_simpleLoadWithFinishBlock:^(NSArray *items, NSError *error, NSInteger statusCode) {
         
         NSString *message;
         
@@ -118,6 +118,7 @@
         
         weakSelf.textView.text = message;
         
+        NSLog(@"Status code: %d", (int) statusCode);
         NSLog(@"Items downloaded: %lu", (unsigned long)[items count]);
     }];
     

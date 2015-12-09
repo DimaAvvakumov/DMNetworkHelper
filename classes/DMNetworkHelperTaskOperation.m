@@ -57,16 +57,19 @@
     AFHTTPRequestOperation *operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = responseObject;
         
-        [weakSelf afterSuccessResponse: result];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger statusCode = operation.response.statusCode;
         
-        [weakSelf afterFailureResponse: error];
+        [weakSelf afterSuccessResponse: result withStatusCode:statusCode];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger statusCode = operation.response.statusCode;
+        
+        [weakSelf afterFailureResponse: error withStatusCode:statusCode];
     }];
     
     [manager.operationQueue addOperation:operation];
 }
 
-- (void)afterSuccessResponse:(NSDictionary *)json {
+- (void)afterSuccessResponse:(NSDictionary *)json withStatusCode:(NSInteger)statusCode {
     if ([self isCancelled]) {
         [self finish];
         
@@ -74,14 +77,14 @@
     }
     
     if ([self responseType] == DMNetworkHelperTaskResponseType_List)  {
-        return [self afterSuccessListResponse:json];
+        return [self afterSuccessListResponse:json withStatusCode:statusCode];
     } else {
-        return [self afterSuccessItemResponse:json];
+        return [self afterSuccessItemResponse:json withStatusCode:statusCode];
     }
     
 }
 
-- (void)afterSuccessListResponse:(NSDictionary *)json {
+- (void)afterSuccessListResponse:(NSDictionary *)json withStatusCode:(NSInteger)statusCode {
 
     NSArray *itemsJson = nil;
     NSString *key = [self itemsKey];
@@ -109,7 +112,7 @@
         
         if (_finishBlock) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                _finishBlock(nil, error);
+                _finishBlock(nil, error, statusCode);
             });
         }
         
@@ -150,21 +153,21 @@
     
     if (_finishBlock) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            _finishBlock(items, nil);
+            _finishBlock(items, nil, statusCode);
         });
     }
     
     [self finish];
 }
 
-- (void)afterSuccessItemResponse:(NSDictionary *)json {
+- (void)afterSuccessItemResponse:(NSDictionary *)json withStatusCode:(NSInteger)statusCode {
     
 }
 
-- (void)afterFailureResponse:(NSError *)error {
+- (void)afterFailureResponse:(NSError *)error withStatusCode:(NSInteger)statusCode {
     if (_finishBlock) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            _finishBlock(nil, error);
+            _finishBlock(nil, error, statusCode);
         });
     }
     

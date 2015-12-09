@@ -10,7 +10,7 @@
 
 @class NSManagedObjectContext;
 
-typedef void (^DMNetworkHelperListTaskFinishBlock)(NSArray *items, NSError *error);
+typedef void (^DMNetworkHelperListTaskFinishBlock)(NSArray *items, NSError *error, NSInteger statusCode);
 
 typedef enum {
     DMNetworkHelperTaskMethod_GET,
