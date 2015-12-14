@@ -11,12 +11,19 @@
 @class NSManagedObjectContext;
 
 typedef void (^DMNetworkHelperListTaskFinishBlock)(NSArray *items, NSError *error, NSInteger statusCode);
+typedef void (^DMNetworkHelperDownloadTaskFinishBlock)(NSString *filePath, NSError *error, NSInteger statusCode);
+typedef void (^DMNetworkHelperProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
 
 typedef enum {
     DMNetworkHelperTaskMethod_GET,
     DMNetworkHelperTaskMethod_PUT,
     DMNetworkHelperTaskMethod_POST
 } DMNetworkHelperTaskMethod;
+
+typedef enum {
+    DMNetworkHelperTaskRequestType_None,
+    DMNetworkHelperTaskRequestType_FileDownload
+} DMNetworkHelperTaskRequestType;
 
 typedef enum {
     DMNetworkHelperTaskResponseType_List,
@@ -29,9 +36,13 @@ typedef enum {
 
 @property (strong, nonatomic) id params;
 
+@property (copy, nonatomic) DMNetworkHelperProgressBlock progressBlock;
+
 - (void)executeWithCompletitionBlock:(DMNetworkHelperListTaskFinishBlock)finishBlock;
+- (void)executeWithDownloadCompletitionBlock:(DMNetworkHelperDownloadTaskFinishBlock)finishBlock;
 
 #pragma mark - method for rewrite
+- (DMNetworkHelperTaskRequestType)requestType;
 - (DMNetworkHelperTaskResponseType)responseType;
 - (NSString *)absolutePath;
 - (NSString *)path;
@@ -41,5 +52,7 @@ typedef enum {
 
 - (id)parseItem:(NSDictionary *)itemInfo;
 - (id)parseItem:(NSDictionary *)itemInfo inLocalContext:(NSManagedObjectContext *)localContext;
+
+- (NSString *)afterDownloadFileAtTmpPath:(NSString *)tmpPath withResponse:(NSHTTPURLResponse *)response;
 
 @end

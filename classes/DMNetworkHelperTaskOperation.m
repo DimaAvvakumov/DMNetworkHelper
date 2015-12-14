@@ -7,6 +7,7 @@
 //
 
 // frameworks
+#import <StandardPaths/StandardPaths.h>
 #import <AFNetworking/AFNetworking.h>
 #import <MagicalRecord/MagicalRecord.h>
 
@@ -21,6 +22,7 @@
 @property (strong, nonatomic) NSManagedObjectContext *localContext;
 
 @property (copy, nonatomic) DMNetworkHelperListTaskFinishBlock finishBlock;
+@property (copy, nonatomic) DMNetworkHelperDownloadTaskFinishBlock downloadFinishBlock;
 
 @end
 
@@ -32,6 +34,9 @@
         
         return;
     }
+    
+    // request type
+    DMNetworkHelperTaskRequestType requestType = [self requestType];
     
     // performing request
     AFHTTPRequestOperationManager *manager = [DMNetworkHelperManager sharedInstance].operationManager;
@@ -51,23 +56,62 @@
     if (requestURL == nil) {
         requestURL = [DM_NHM_SharedInstance requestURLByAppendPath:[self path]];
     }
+    if (requestType == DMNetworkHelperTaskRequestType_FileDownload) {
+        requestURL = [self.params objectForKey:@"url"];
+    }
+    
     NSString *method = [self methodString];
     
     // weak self
     __weak typeof (self) weakSelf = self;
-
+    
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:method URLString:requestURL parameters:self.params error:nil];
-    AFHTTPRequestOperation *operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *result = responseObject;
+    AFHTTPRequestOperation *operation;
+    
+    if (requestType == DMNetworkHelperTaskRequestType_FileDownload) {
         
-        NSInteger statusCode = operation.response.statusCode;
+        NSString *url = [[self.params objectForKey:@"url"] lastPathComponent];
+        __block NSString *tmpPath = [[[NSFileManager defaultManager] pathForCacheFile:url] stringByAppendingString:@".tmp"];
+
+        operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *result = responseObject;
+            
+            [weakSelf afterSuccessDownloadWithResponse:operation.response andTmpPath:tmpPath];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSInteger statusCode = operation.response.statusCode;
+            
+            [weakSelf afterFailureResponse: error withStatusCode:statusCode];
+        }];
         
-        [weakSelf afterSuccessResponse: result withStatusCode:statusCode];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSInteger statusCode = operation.response.statusCode;
+        [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+            
+            typeof (weakSelf) strongSelf = weakSelf;
+            if (!strongSelf) {
+                return;
+            }
+            
+            if (strongSelf.progressBlock) {
+                strongSelf.progressBlock( bytesRead, totalBytesRead, totalBytesExpectedToRead );
+            }
+            
+        }];
         
-        [weakSelf afterFailureResponse: error withStatusCode:statusCode];
-    }];
+        operation.outputStream = [NSOutputStream outputStreamToFileAtPath: tmpPath append: NO];
+        
+    } else {
+        operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *result = responseObject;
+            
+            NSInteger statusCode = operation.response.statusCode;
+            
+            [weakSelf afterSuccessResponse: result withStatusCode:statusCode];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSInteger statusCode = operation.response.statusCode;
+            
+            [weakSelf afterFailureResponse: error withStatusCode:statusCode];
+        }];
+    }
+    
     
     [manager.operationQueue addOperation:operation];
 }
@@ -167,6 +211,24 @@
     
 }
 
+- (void)afterSuccessDownloadWithResponse:(NSHTTPURLResponse *)response andTmpPath:(NSString *)tmpPath {
+    if ([self isCancelled]) {
+        [self finish];
+        
+        return;
+    }
+    
+    NSString *filePath = [self afterDownloadFileAtTmpPath:tmpPath withResponse:response];
+    
+    if (_downloadFinishBlock) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            _downloadFinishBlock(filePath, nil, response.statusCode);
+        });
+    }
+    
+    [self finishBlock];
+}
+
 - (void)afterFailureResponse:(NSError *)error withStatusCode:(NSInteger)statusCode {
     if (_finishBlock) {
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -198,6 +260,10 @@
 
 #pragma mark - Default
 
+- (DMNetworkHelperTaskRequestType)requestType {
+    return DMNetworkHelperTaskRequestType_None;
+}
+
 - (DMNetworkHelperTaskResponseType)responseType {
     return DMNetworkHelperTaskResponseType_List;
 }
@@ -224,6 +290,10 @@
 
 - (id)parseItem:(NSDictionary *)itemInfo inLocalContext:(NSManagedObjectContext *)localContext {
     return nil;
+}
+
+- (BOOL)afterDownloadFileAtTmpPath:(NSString *)tmpPath withResponse:(NSHTTPURLResponse *)response {
+    return NO;
 }
 
 - (BOOL)databaseIsUsing {
@@ -254,6 +324,12 @@
 
 - (void)executeWithCompletitionBlock:(DMNetworkHelperListTaskFinishBlock)finishBlock {
     self.finishBlock = finishBlock;
+    
+    [DM_NHM_SharedInstance addOperation:self];
+}
+
+- (void)executeWithDownloadCompletitionBlock:(DMNetworkHelperDownloadTaskFinishBlock)finishBlock {
+    self.downloadFinishBlock = finishBlock;
     
     [DM_NHM_SharedInstance addOperation:self];
 }
