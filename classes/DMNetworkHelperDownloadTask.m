@@ -107,7 +107,7 @@
     
     NSInteger statusCode = response.statusCode;
     
-    NSString *filePath = [self afterDownloadTempFile:tmpPath];
+    NSString *filePath = [self afterDownloadTempFile:tmpPath withResponse:response];
     if (filePath == nil) {
         filePath = [self canonizeFilePath:self.url];
         
@@ -207,7 +207,7 @@
     [self finish];
 }
 
-- (NSString *)afterDownloadTempFile:(NSString *)tmpFilePath {
+- (NSString *)afterDownloadTempFile:(NSString *)tmpFilePath withResponse:(NSHTTPURLResponse *)response {
     
     return nil;
 }

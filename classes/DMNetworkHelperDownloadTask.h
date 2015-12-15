@@ -17,6 +17,6 @@ typedef void (^DMNetworkHelperProgressBlock)(NSUInteger bytesRead, long long tot
 
 - (void)executeWithProgressBlock:(DMNetworkHelperProgressBlock)progressBlock andCompletitionBlock:(DMNetworkHelperDownloadTaskFinishBlock)finishBlock;
 
-- (NSString *)afterDownloadTempFile:(NSString *)tmpFilePath;
+- (NSString *)afterDownloadTempFile:(NSString *)tmpFilePath withResponse:(NSHTTPURLResponse *)response;
 
 @end
