@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1801A45F1C1FF4BC00DF3475 /* DMNetworkHelperBasicTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801A45E1C1FF4BB00DF3475 /* DMNetworkHelperBasicTask.m */; };
 		1842C5BC1C0EFF5300E6D6EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5BB1C0EFF5300E6D6EE /* main.m */; };
 		1842C5BF1C0EFF5300E6D6EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5BE1C0EFF5300E6D6EE /* AppDelegate.m */; };
 		1842C5C21C0EFF5300E6D6EE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5C11C0EFF5300E6D6EE /* ViewController.m */; };
@@ -14,14 +15,19 @@
 		1842C5C71C0EFF5300E6D6EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1842C5C61C0EFF5300E6D6EE /* Assets.xcassets */; };
 		1842C5CA1C0EFF5300E6D6EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1842C5C81C0EFF5300E6D6EE /* LaunchScreen.storyboard */; };
 		1842C5D61C0F079E00E6D6EE /* DMNetworkHelperManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5D31C0F079E00E6D6EE /* DMNetworkHelperManager.m */; };
-		1842C5D71C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5D51C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m */; };
-		1842C5DB1C0F0A9200E6D6EE /* SimpleLoadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5DA1C0F0A9200E6D6EE /* SimpleLoadTask.m */; };
 		1842C5DE1C0F0AA600E6D6EE /* SimpleNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5DD1C0F0AA600E6D6EE /* SimpleNetworkHelper.m */; };
 		1842C5E51C0F0C8D00E6D6EE /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842C5E41C0F0C8D00E6D6EE /* SettingsManager.m */; };
+		1844BB1A1C20083000DB2030 /* DMNetworkHelperRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB191C20083000DB2030 /* DMNetworkHelperRequestTask.m */; };
+		1844BB1E1C200E7700DB2030 /* DMNetworkHelperListTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB1D1C200E7700DB2030 /* DMNetworkHelperListTask.m */; };
+		1844BB211C2013F700DB2030 /* DMNetworkHelperDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB201C2013F700DB2030 /* DMNetworkHelperDownloadTask.m */; };
+		1844BB2A1C2043BA00DB2030 /* FileLoadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB271C2043BA00DB2030 /* FileLoadTask.m */; };
+		1844BB2B1C2043BA00DB2030 /* SimpleLoadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB291C2043BA00DB2030 /* SimpleLoadTask.m */; };
 		24034B5CF0EAA5703D0E1A4D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37691D469C1F8D9B1DC4E18F /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1801A45D1C1FF4BB00DF3475 /* DMNetworkHelperBasicTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperBasicTask.h; sourceTree = "<group>"; };
+		1801A45E1C1FF4BB00DF3475 /* DMNetworkHelperBasicTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperBasicTask.m; sourceTree = "<group>"; };
 		1842C5B71C0EFF5300E6D6EE /* DMNetworkHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMNetworkHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1842C5BB1C0EFF5300E6D6EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1842C5BD1C0EFF5300E6D6EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -34,14 +40,21 @@
 		1842C5CB1C0EFF5300E6D6EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1842C5D21C0F079E00E6D6EE /* DMNetworkHelperManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperManager.h; sourceTree = "<group>"; };
 		1842C5D31C0F079E00E6D6EE /* DMNetworkHelperManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperManager.m; sourceTree = "<group>"; };
-		1842C5D41C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperTaskOperation.h; sourceTree = "<group>"; };
-		1842C5D51C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperTaskOperation.m; sourceTree = "<group>"; };
-		1842C5D91C0F0A9200E6D6EE /* SimpleLoadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleLoadTask.h; sourceTree = "<group>"; };
-		1842C5DA1C0F0A9200E6D6EE /* SimpleLoadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleLoadTask.m; sourceTree = "<group>"; };
 		1842C5DC1C0F0AA600E6D6EE /* SimpleNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleNetworkHelper.h; sourceTree = "<group>"; };
 		1842C5DD1C0F0AA600E6D6EE /* SimpleNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleNetworkHelper.m; sourceTree = "<group>"; };
 		1842C5E31C0F0C8D00E6D6EE /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
 		1842C5E41C0F0C8D00E6D6EE /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
+		1844BB181C20083000DB2030 /* DMNetworkHelperRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperRequestTask.h; sourceTree = "<group>"; };
+		1844BB191C20083000DB2030 /* DMNetworkHelperRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperRequestTask.m; sourceTree = "<group>"; };
+		1844BB1B1C20099900DB2030 /* DMNetworkHelperBasicTaskProtected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperBasicTaskProtected.h; sourceTree = "<group>"; };
+		1844BB1C1C200E7700DB2030 /* DMNetworkHelperListTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperListTask.h; sourceTree = "<group>"; };
+		1844BB1D1C200E7700DB2030 /* DMNetworkHelperListTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperListTask.m; sourceTree = "<group>"; };
+		1844BB1F1C2013F700DB2030 /* DMNetworkHelperDownloadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperDownloadTask.h; sourceTree = "<group>"; };
+		1844BB201C2013F700DB2030 /* DMNetworkHelperDownloadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperDownloadTask.m; sourceTree = "<group>"; };
+		1844BB261C2043BA00DB2030 /* FileLoadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileLoadTask.h; sourceTree = "<group>"; };
+		1844BB271C2043BA00DB2030 /* FileLoadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileLoadTask.m; sourceTree = "<group>"; };
+		1844BB281C2043BA00DB2030 /* SimpleLoadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleLoadTask.h; sourceTree = "<group>"; };
+		1844BB291C2043BA00DB2030 /* SimpleLoadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleLoadTask.m; sourceTree = "<group>"; };
 		37691D469C1F8D9B1DC4E18F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4EA70375CAED812688C91ED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD5C952F61B10BCD48CA9097 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,8 +122,15 @@
 			children = (
 				1842C5D21C0F079E00E6D6EE /* DMNetworkHelperManager.h */,
 				1842C5D31C0F079E00E6D6EE /* DMNetworkHelperManager.m */,
-				1842C5D41C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.h */,
-				1842C5D51C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m */,
+				1844BB1B1C20099900DB2030 /* DMNetworkHelperBasicTaskProtected.h */,
+				1801A45D1C1FF4BB00DF3475 /* DMNetworkHelperBasicTask.h */,
+				1801A45E1C1FF4BB00DF3475 /* DMNetworkHelperBasicTask.m */,
+				1844BB181C20083000DB2030 /* DMNetworkHelperRequestTask.h */,
+				1844BB191C20083000DB2030 /* DMNetworkHelperRequestTask.m */,
+				1844BB1C1C200E7700DB2030 /* DMNetworkHelperListTask.h */,
+				1844BB1D1C200E7700DB2030 /* DMNetworkHelperListTask.m */,
+				1844BB1F1C2013F700DB2030 /* DMNetworkHelperDownloadTask.h */,
+				1844BB201C2013F700DB2030 /* DMNetworkHelperDownloadTask.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -118,8 +138,7 @@
 		1842C5D81C0F0A6400E6D6EE /* networkHelper */ = {
 			isa = PBXGroup;
 			children = (
-				1842C5D91C0F0A9200E6D6EE /* SimpleLoadTask.h */,
-				1842C5DA1C0F0A9200E6D6EE /* SimpleLoadTask.m */,
+				1844BB251C2043B100DB2030 /* tasks */,
 				1842C5DC1C0F0AA600E6D6EE /* SimpleNetworkHelper.h */,
 				1842C5DD1C0F0AA600E6D6EE /* SimpleNetworkHelper.m */,
 			);
@@ -133,6 +152,17 @@
 				1842C5E41C0F0C8D00E6D6EE /* SettingsManager.m */,
 			);
 			path = managers;
+			sourceTree = "<group>";
+		};
+		1844BB251C2043B100DB2030 /* tasks */ = {
+			isa = PBXGroup;
+			children = (
+				1844BB261C2043BA00DB2030 /* FileLoadTask.h */,
+				1844BB271C2043BA00DB2030 /* FileLoadTask.m */,
+				1844BB281C2043BA00DB2030 /* SimpleLoadTask.h */,
+				1844BB291C2043BA00DB2030 /* SimpleLoadTask.m */,
+			);
+			path = tasks;
 			sourceTree = "<group>";
 		};
 		56F3B76E64A2CD79A75EFBEE /* Pods */ = {
@@ -275,12 +305,16 @@
 			files = (
 				1842C5C21C0EFF5300E6D6EE /* ViewController.m in Sources */,
 				1842C5E51C0F0C8D00E6D6EE /* SettingsManager.m in Sources */,
+				1844BB211C2013F700DB2030 /* DMNetworkHelperDownloadTask.m in Sources */,
 				1842C5D61C0F079E00E6D6EE /* DMNetworkHelperManager.m in Sources */,
 				1842C5DE1C0F0AA600E6D6EE /* SimpleNetworkHelper.m in Sources */,
-				1842C5DB1C0F0A9200E6D6EE /* SimpleLoadTask.m in Sources */,
-				1842C5D71C0F079E00E6D6EE /* DMNetworkHelperTaskOperation.m in Sources */,
+				1844BB2A1C2043BA00DB2030 /* FileLoadTask.m in Sources */,
+				1844BB1A1C20083000DB2030 /* DMNetworkHelperRequestTask.m in Sources */,
+				1844BB1E1C200E7700DB2030 /* DMNetworkHelperListTask.m in Sources */,
+				1844BB2B1C2043BA00DB2030 /* SimpleLoadTask.m in Sources */,
 				1842C5BF1C0EFF5300E6D6EE /* AppDelegate.m in Sources */,
 				1842C5BC1C0EFF5300E6D6EE /* main.m in Sources */,
+				1801A45F1C1FF4BC00DF3475 /* DMNetworkHelperBasicTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

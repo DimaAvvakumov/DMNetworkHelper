@@ -32,7 +32,7 @@
                                 <rect key="frame" x="74" y="40" width="15" height="18"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5VK-NJ-Zub" userLabel="TextField - Host">
@@ -54,7 +54,7 @@
                                 <rect key="frame" x="521" y="40" width="5" height="18"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nDj-bF-nY1" userLabel="TextField - Port">
@@ -91,7 +91,7 @@
                                 <rect key="frame" x="10" y="120" width="58" height="15"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uuW-GS-gzf" userLabel="TextField - Username">
@@ -124,8 +124,34 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LMP-L2-9sV" userLabel="TextField - Filepath">
+                                <rect key="frame" x="10" y="187" width="484" height="37"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="7lV-TQ-jgw"/>
+                                    <constraint firstAttribute="height" constant="37" id="j8C-yi-eCQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7lV-TQ-jgw"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eU-ap-4bf">
+                                <rect key="frame" x="510" y="191" width="80" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Ynq-K8-3s4"/>
+                                </constraints>
+                                <state key="normal" title="Download"/>
+                                <connections>
+                                    <action selector="downloadAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nLs-aT-tCx"/>
+                                </connections>
+                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fan-mg-V6f">
-                                <rect key="frame" x="10" y="187" width="580" height="403"/>
+                                <rect key="frame" x="10" y="234" width="580" height="356"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -142,16 +168,20 @@
                             <constraint firstItem="nDj-bF-nY1" firstAttribute="leading" secondItem="LfM-9g-Q5A" secondAttribute="trailing" constant="4" id="7wC-qt-SOV"/>
                             <constraint firstItem="87B-RW-mlD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="ARJ-KN-EpH"/>
                             <constraint firstItem="oDm-p4-03b" firstAttribute="leading" secondItem="uuW-GS-gzf" secondAttribute="trailing" constant="20" id="AZJ-Df-feG"/>
+                            <constraint firstAttribute="trailing" secondItem="LMP-L2-9sV" secondAttribute="trailing" constant="100" id="BJx-z2-qow"/>
                             <constraint firstItem="tNf-wh-FKQ" firstAttribute="leading" secondItem="87B-RW-mlD" secondAttribute="trailing" constant="10" id="DLN-o2-pFA"/>
                             <constraint firstItem="87B-RW-mlD" firstAttribute="top" secondItem="5VK-NJ-Zub" secondAttribute="bottom" constant="6" id="GLF-IH-GWa"/>
                             <constraint firstItem="oDm-p4-03b" firstAttribute="centerY" secondItem="uuW-GS-gzf" secondAttribute="centerY" id="GeQ-dc-hyH"/>
                             <constraint firstItem="fan-mg-V6f" firstAttribute="top" secondItem="87B-RW-mlD" secondAttribute="bottom" constant="100" id="Gqx-Dn-wSZ"/>
                             <constraint firstItem="LfM-9g-Q5A" firstAttribute="centerY" secondItem="5VK-NJ-Zub" secondAttribute="centerY" id="HK1-CM-B5J"/>
                             <constraint firstItem="kME-LF-IWx" firstAttribute="leading" secondItem="m9B-ts-mY0" secondAttribute="trailing" constant="4" id="Ka1-I1-ahC"/>
-                            <constraint firstItem="fan-mg-V6f" firstAttribute="top" secondItem="oDm-p4-03b" secondAttribute="bottom" constant="10" id="Om7-23-ioy"/>
+                            <constraint firstItem="fan-mg-V6f" firstAttribute="top" secondItem="oDm-p4-03b" secondAttribute="bottom" constant="60" id="Om7-23-ioy"/>
+                            <constraint firstItem="fan-mg-V6f" firstAttribute="top" secondItem="LMP-L2-9sV" secondAttribute="bottom" constant="10" id="SsK-2c-PPx"/>
                             <constraint firstItem="uuW-GS-gzf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="W3e-A1-jnu"/>
                             <constraint firstItem="CU5-n7-2lX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="XRa-KM-kt6"/>
+                            <constraint firstItem="1eU-ap-4bf" firstAttribute="centerY" secondItem="LMP-L2-9sV" secondAttribute="centerY" id="adW-8b-ATx"/>
                             <constraint firstItem="oDm-p4-03b" firstAttribute="width" secondItem="uuW-GS-gzf" secondAttribute="width" id="e6d-Na-Gi9"/>
+                            <constraint firstItem="LMP-L2-9sV" firstAttribute="top" secondItem="uuW-GS-gzf" secondAttribute="bottom" constant="10" id="eYO-wH-JGB"/>
                             <constraint firstItem="5VK-NJ-Zub" firstAttribute="leading" secondItem="kME-LF-IWx" secondAttribute="trailing" constant="4" id="frs-IC-9zv"/>
                             <constraint firstItem="nDj-bF-nY1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="30" id="g2g-O9-XCk"/>
                             <constraint firstAttribute="trailing" secondItem="87B-RW-mlD" secondAttribute="trailing" constant="80" id="gWV-sh-ZfQ"/>
@@ -159,6 +189,8 @@
                             <constraint firstItem="CU5-n7-2lX" firstAttribute="top" secondItem="87B-RW-mlD" secondAttribute="bottom" constant="10" id="lfE-bL-1dU"/>
                             <constraint firstItem="fan-mg-V6f" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="mX4-Tc-EUK"/>
                             <constraint firstItem="tNf-wh-FKQ" firstAttribute="centerY" secondItem="87B-RW-mlD" secondAttribute="centerY" id="nVz-2v-PgR"/>
+                            <constraint firstItem="LMP-L2-9sV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="pZw-Cl-Z08"/>
+                            <constraint firstItem="1eU-ap-4bf" firstAttribute="leading" secondItem="LMP-L2-9sV" secondAttribute="trailing" constant="16" id="tLa-YM-5xT"/>
                             <constraint firstAttribute="trailing" secondItem="nDj-bF-nY1" secondAttribute="trailing" constant="10" id="uef-De-tMB"/>
                             <constraint firstItem="uuW-GS-gzf" firstAttribute="top" secondItem="CU5-n7-2lX" secondAttribute="bottom" constant="5" id="wyq-yR-eb5"/>
                             <constraint firstItem="kME-LF-IWx" firstAttribute="centerY" secondItem="m9B-ts-mY0" secondAttribute="centerY" id="xKC-44-M0Z"/>
@@ -166,15 +198,19 @@
                             <constraint firstItem="uuW-GS-gzf" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.4" id="xg9-Ko-xLU"/>
                             <constraint firstItem="LfM-9g-Q5A" firstAttribute="leading" secondItem="5VK-NJ-Zub" secondAttribute="trailing" constant="4" id="xoI-JV-Xfh"/>
                             <constraint firstItem="5VK-NJ-Zub" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="30" id="yCE-Rb-e1E"/>
+                            <constraint firstAttribute="trailing" secondItem="1eU-ap-4bf" secondAttribute="trailing" constant="10" id="ybA-QY-LJz"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="gWV-sh-ZfQ"/>
+                                <exclude reference="BJx-z2-qow"/>
                                 <exclude reference="Gqx-Dn-wSZ"/>
+                                <exclude reference="Om7-23-ioy"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="fileTextField" destination="LMP-L2-9sV" id="Vw8-KZ-o0i"/>
                         <outlet property="hostTextField" destination="5VK-NJ-Zub" id="V8H-Sz-Tkg"/>
                         <outlet property="passwordTextField" destination="oDm-p4-03b" id="MKP-xe-edd"/>
                         <outlet property="pathTextField" destination="87B-RW-mlD" id="Ulb-P3-bHg"/>
@@ -186,6 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="545" y="454"/>
         </scene>
     </scenes>
 </document>

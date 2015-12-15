@@ -47,6 +47,8 @@
     self.username = [userDefaults stringForKey:@"Username"];
     self.password = [userDefaults stringForKey:@"Password"];
     
+    self.fileURL = [userDefaults stringForKey:@"FileURL"];
+    
 }
 
 - (void)save {
@@ -69,6 +71,9 @@
     }
     if (self.password) {
         [userDefaults setObject:self.password forKey:@"Password"];
+    }
+    if (self.fileURL) {
+        [userDefaults setObject:self.fileURL forKey:@"FileURL"];
     }
     
     [userDefaults synchronize];

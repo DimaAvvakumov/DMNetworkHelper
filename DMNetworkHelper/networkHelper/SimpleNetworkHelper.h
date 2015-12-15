@@ -9,10 +9,15 @@
 #import <Foundation/Foundation.h>
 
 #import "SimpleLoadTask.h"
+#import "FileLoadTask.h"
 
 @protocol SimpleNetworkHelper <NSObject>
 
 - (NSOperation *) nh_simpleLoadWithFinishBlock:(DMNetworkHelperListTaskFinishBlock)finishBlock;
+
+- (NSOperation *) nh_loadFileAtURL:(NSString *)url
+                     progressBlock:(DMNetworkHelperProgressBlock)progressBlock
+                   withFinishBlock:(DMNetworkHelperDownloadTaskFinishBlock)finishBlock;
 
 @end
 

@@ -18,4 +18,17 @@
     return task;
 }
 
+- (NSOperation *) nh_loadFileAtURL:(NSString *)url
+                     progressBlock:(DMNetworkHelperProgressBlock)progressBlock
+                   withFinishBlock:(DMNetworkHelperDownloadTaskFinishBlock)finishBlock {
+    
+    FileLoadTask *task = [[FileLoadTask alloc] init];
+    task.url = url;
+    
+    [task executeWithProgressBlock:progressBlock andCompletitionBlock:finishBlock];
+    
+    return task;
+    
+}
+
 @end

@@ -10,11 +10,7 @@
 
 @implementation SimpleLoadTask
 
-- (DMNetworkHelperTaskResponseType)responseType {
-    return DMNetworkHelperTaskResponseType_List;
-}
-
-- (NSString *)path {
+- (NSString *)relativePath {
     return @"api/contacts";
 }
 
