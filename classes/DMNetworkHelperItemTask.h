@@ -8,7 +8,7 @@
 
 #import "DMNetworkHelperRequestTask.h"
 
-typedef void (^DMNetworkHelperItemTaskFinishBlock)(NSArray *items, NSError *error, NSInteger statusCode);
+typedef void (^DMNetworkHelperItemTaskFinishBlock)(id item, NSError *error, NSInteger statusCode);
 
 @interface DMNetworkHelperItemTask : DMNetworkHelperRequestTask
 
