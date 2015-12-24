@@ -40,6 +40,19 @@
     NSArray *itemsJson = nil;
     NSString *key = [self itemsKey];
     
+    
+    if ([key isEqualToString:@"-"]) {
+        if (_finishBlock) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                _finishBlock(nil, nil, statusCode);
+            });
+        }
+        
+        [self finish];
+        
+        return;
+    }
+    
     if ([key isEqualToString:@"*"] && [json isKindOfClass:[NSArray class]]) {
         itemsJson = (NSArray *) json;
     } else {
