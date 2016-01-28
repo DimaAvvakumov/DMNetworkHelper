@@ -42,7 +42,7 @@
     }
     
     // performing request
-    AFHTTPRequestOperationManager *manager = [DMNetworkHelperManager sharedInstance].operationManager;
+    AFHTTPSessionManager *manager = [DMNetworkHelperManager sharedInstance].sessionManager;
     
     // result queue
     manager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -67,40 +67,31 @@
     NSString *tmpFileName = [[[NSProcessInfo processInfo] globallyUniqueString] stringByAppendingString:@".tmp"];
     __block NSString *tmpPath = [[NSFileManager defaultManager] pathForCacheFile:tmpFileName];
     
-    AFHTTPRequestOperation *operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        typeof (weakSelf) strongSelf = weakSelf;
-        if (!strongSelf) {
-            return;
-        }
-        
-        [weakSelf afterSuccessResponse:operation.response withTmpFile:tmpPath];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        typeof (weakSelf) strongSelf = weakSelf;
-        if (!strongSelf) {
-            return;
-        }
-        
-        [weakSelf afterFailureResponse:operation.response withError:error];
-    }];
-    
-    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-        
+    [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         typeof (weakSelf) strongSelf = weakSelf;
         if (!strongSelf) {
             return;
         }
         
         if (strongSelf.progressBlock) {
-            strongSelf.progressBlock( bytesRead, totalBytesRead, totalBytesExpectedToRead );
+//            strongSelf.progressBlock( 0, totalBytesRead, totalBytesExpectedToRead );
+            strongSelf.progressBlock( 0, downloadProgress.completedUnitCount, downloadProgress.totalUnitCount );
         }
         
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        return [NSURL fileURLWithPath:tmpPath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        typeof (weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) {
+            return;
+        }
+        
+        if (NO == error) {
+            [weakSelf afterSuccessResponse:(NSHTTPURLResponse *)response withTmpFile:tmpPath];
+        } else {
+            [weakSelf afterFailureResponse:(NSHTTPURLResponse *)response withError:error];
+        }
     }];
-    
-    operation.outputStream = [NSOutputStream outputStreamToFileAtPath: tmpPath append: NO];
-    
-    [manager.operationQueue addOperation:operation];
 }
 
 - (void)afterSuccessResponse:(NSHTTPURLResponse *)response withTmpFile:(NSString *)tmpPath {

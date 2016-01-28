@@ -31,7 +31,7 @@
     }
     
     // performing request
-    AFHTTPRequestOperationManager *manager = [DMNetworkHelperManager sharedInstance].operationManager;
+    AFHTTPSessionManager *manager = [DMNetworkHelperManager sharedInstance].sessionManager;
     
     // result queue
     manager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -55,25 +55,20 @@
     __weak typeof (self) weakSelf = self;
     
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:method URLString:requestURL parameters:self.params error:nil];
-    AFHTTPRequestOperation *operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        typeof (weakSelf) strongSelf = weakSelf;
-        if (!strongSelf) {
-            return;
-        }
-        
-        [strongSelf afterSuccessResponse:operation.response withObject:responseObject];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        typeof (weakSelf) strongSelf = weakSelf;
-        if (!strongSelf) {
-            return;
-        }
-        
-        [strongSelf afterFailureResponse:operation.response withError:error];
-    }];
     
-    [manager.operationQueue addOperation:operation];
+    [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        typeof (weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) {
+            return;
+        }
+        
+        if (NO == error) {
+            [strongSelf afterSuccessResponse:(NSHTTPURLResponse *)response withObject:responseObject];
+        } else {
+            [strongSelf afterFailureResponse:(NSHTTPURLResponse *)response withError:error];
+        
+        }
+    }];
 }
 
 - (void)afterSuccessResponse:(NSHTTPURLResponse *)response withObject:(id)responseObject {
