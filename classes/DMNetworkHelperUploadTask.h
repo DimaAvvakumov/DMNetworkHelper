@@ -6,7 +6,7 @@
 //  Copyright © 2015 Dmitry Avvakumov. All rights reserved.
 //
 
-#import <DMNetworkHelper/DMNetworkHelperBasicTask.h>
+#import "DMNetworkHelperBasicTask.h"
 
 typedef void (^DMNetworkHelperUploadTaskFinishBlock)(_Nullable id item, NSError __autoreleasing * _Nullable  error, NSInteger statusCode);
 typedef void (^DMNetworkHelperProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);

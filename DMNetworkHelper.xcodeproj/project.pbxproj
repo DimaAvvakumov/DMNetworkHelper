@@ -22,6 +22,8 @@
 		1844BB211C2013F700DB2030 /* DMNetworkHelperDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB201C2013F700DB2030 /* DMNetworkHelperDownloadTask.m */; };
 		1844BB2A1C2043BA00DB2030 /* FileLoadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB271C2043BA00DB2030 /* FileLoadTask.m */; };
 		1844BB2B1C2043BA00DB2030 /* SimpleLoadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB291C2043BA00DB2030 /* SimpleLoadTask.m */; };
+		18F233C81C5B6C3A0070DACD /* DMNetworkHelperUploadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F233C71C5B6C3A0070DACD /* DMNetworkHelperUploadTask.m */; };
+		18F233CB1C5B6C410070DACD /* DMNetworkHelperItemTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F233CA1C5B6C410070DACD /* DMNetworkHelperItemTask.m */; };
 		24034B5CF0EAA5703D0E1A4D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37691D469C1F8D9B1DC4E18F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,10 @@
 		1844BB271C2043BA00DB2030 /* FileLoadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileLoadTask.m; sourceTree = "<group>"; };
 		1844BB281C2043BA00DB2030 /* SimpleLoadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleLoadTask.h; sourceTree = "<group>"; };
 		1844BB291C2043BA00DB2030 /* SimpleLoadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleLoadTask.m; sourceTree = "<group>"; };
+		18F233C61C5B6C3A0070DACD /* DMNetworkHelperUploadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperUploadTask.h; sourceTree = "<group>"; };
+		18F233C71C5B6C3A0070DACD /* DMNetworkHelperUploadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperUploadTask.m; sourceTree = "<group>"; };
+		18F233C91C5B6C410070DACD /* DMNetworkHelperItemTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperItemTask.h; sourceTree = "<group>"; };
+		18F233CA1C5B6C410070DACD /* DMNetworkHelperItemTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperItemTask.m; sourceTree = "<group>"; };
 		37691D469C1F8D9B1DC4E18F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4EA70375CAED812688C91ED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD5C952F61B10BCD48CA9097 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,8 +135,12 @@
 				1844BB191C20083000DB2030 /* DMNetworkHelperRequestTask.m */,
 				1844BB1C1C200E7700DB2030 /* DMNetworkHelperListTask.h */,
 				1844BB1D1C200E7700DB2030 /* DMNetworkHelperListTask.m */,
+				18F233C91C5B6C410070DACD /* DMNetworkHelperItemTask.h */,
+				18F233CA1C5B6C410070DACD /* DMNetworkHelperItemTask.m */,
 				1844BB1F1C2013F700DB2030 /* DMNetworkHelperDownloadTask.h */,
 				1844BB201C2013F700DB2030 /* DMNetworkHelperDownloadTask.m */,
+				18F233C61C5B6C3A0070DACD /* DMNetworkHelperUploadTask.h */,
+				18F233C71C5B6C3A0070DACD /* DMNetworkHelperUploadTask.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -313,8 +323,10 @@
 				1844BB1E1C200E7700DB2030 /* DMNetworkHelperListTask.m in Sources */,
 				1844BB2B1C2043BA00DB2030 /* SimpleLoadTask.m in Sources */,
 				1842C5BF1C0EFF5300E6D6EE /* AppDelegate.m in Sources */,
+				18F233C81C5B6C3A0070DACD /* DMNetworkHelperUploadTask.m in Sources */,
 				1842C5BC1C0EFF5300E6D6EE /* main.m in Sources */,
 				1801A45F1C1FF4BC00DF3475 /* DMNetworkHelperBasicTask.m in Sources */,
+				18F233CB1C5B6C410070DACD /* DMNetworkHelperItemTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
