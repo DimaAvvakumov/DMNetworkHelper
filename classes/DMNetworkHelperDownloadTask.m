@@ -67,7 +67,7 @@
     NSString *tmpFileName = [[[NSProcessInfo processInfo] globallyUniqueString] stringByAppendingString:@".tmp"];
     __block NSString *tmpPath = [[NSFileManager defaultManager] pathForCacheFile:tmpFileName];
     
-    [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSURLSessionDownloadTask *dataTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         typeof (weakSelf) strongSelf = weakSelf;
         if (!strongSelf) {
             return;
@@ -92,6 +92,8 @@
             [weakSelf afterFailureResponse:(NSHTTPURLResponse *)response withError:error];
         }
     }];
+    
+    [dataTask resume];
 }
 
 - (void)afterSuccessResponse:(NSHTTPURLResponse *)response withTmpFile:(NSString *)tmpPath {

@@ -56,7 +56,7 @@
     
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:method URLString:requestURL parameters:self.params error:nil];
     
-    [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         typeof (weakSelf) strongSelf = weakSelf;
         if (!strongSelf) {
             return;
@@ -69,6 +69,8 @@
         
         }
     }];
+    
+    [dataTask resume];
 }
 
 - (void)afterSuccessResponse:(NSHTTPURLResponse *)response withObject:(id)responseObject {
