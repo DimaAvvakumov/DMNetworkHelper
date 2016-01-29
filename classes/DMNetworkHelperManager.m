@@ -10,7 +10,7 @@
 
 @interface DMNetworkHelperManager()
 
-@property (strong, nonatomic) AFHTTPRequestOperationManager *storedOperationManager;
+@property (strong, nonatomic) AFHTTPSessionManager *storedSessionManager;
 @property (strong, nonatomic) NSOperationQueue *operationQueue;
 
 @end
@@ -40,7 +40,7 @@
 }
 
 // helper managers
-- (AFHTTPRequestOperationManager *) operationManager {
+- (AFHTTPSessionManager *) sessionManager {
     static dispatch_semaphore_t semaphore;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
@@ -49,17 +49,17 @@
     
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
-    if (self.storedOperationManager == nil) {
-        self.storedOperationManager = [AFHTTPRequestOperationManager manager];
+    if (self.storedSessionManager == nil) {
+        self.storedSessionManager = [AFHTTPSessionManager manager];
     }
     
     dispatch_semaphore_signal(semaphore);
     
-    return self.storedOperationManager;
+    return self.storedSessionManager;
 }
 
-- (void)setOperationManager:(AFHTTPRequestOperationManager *) operationManager {
-    self.storedOperationManager = operationManager;
+- (void)setOperationManager:(AFHTTPSessionManager *) sessionManager {
+    self.storedSessionManager = sessionManager;
 }
 
 - (void)addOperation:(NSOperation *)operation {

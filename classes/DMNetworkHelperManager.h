@@ -19,8 +19,8 @@
 + (instancetype)sharedInstance;
 
 // helper managers
-- (AFHTTPRequestOperationManager *) operationManager;
-- (void)setOperationManager:(AFHTTPRequestOperationManager *) operationManager;
+- (AFHTTPSessionManager *) sessionManager;
+- (void)setOperationManager:(AFHTTPSessionManager *) sessionManager;
 
 - (void)addOperation:(NSOperation *)operation;
 

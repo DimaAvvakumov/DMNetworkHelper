@@ -95,18 +95,20 @@
     DM_NHM_SharedInstance.url = url;
     
     // AFManager
-    AFHTTPRequestOperationManager *requestManager = [DM_NHM_SharedInstance operationManager];
+    AFHTTPSessionManager *requestManager = [DM_NHM_SharedInstance sessionManager];
     
     // Request serializer
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    requestManager.requestSerializer = requestSerializer;
     
     // bind auth credential
     NSString *username = self.usernameTextField.text;
     NSString *password = self.passwordTextField.text;
-    NSURLCredential *credential = [[NSURLCredential alloc] initWithUser:username password:password persistence:NSURLCredentialPersistenceForSession];
-    [requestManager setCredential:credential];
+
+    [requestSerializer setAuthorizationHeaderFieldWithUsername:username password:password];
+    
+    requestManager.requestSerializer = requestSerializer;
+    
     
 }
 
