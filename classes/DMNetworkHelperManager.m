@@ -32,7 +32,7 @@
     if (self == nil) return nil;
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    queue.maxConcurrentOperationCount = 1;
+    // queue.maxConcurrentOperationCount = 5;
     
     self.operationQueue = queue;
     
