@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/DimaAvvakumov/DMNetworkHelper.git" }
   s.source_files = "classes/*.{h,m}"
-  s.public_header_files = "classes/*.{h,m}"
+  s.public_header_files = "classes/*.{h}"
   s.framework    = "UIKit"
   s.requires_arc = true
 
