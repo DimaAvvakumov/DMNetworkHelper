@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import "DMNetworkHelper.h"
 #import <MagicalRecord/MagicalRecord.h>
 
 @interface AppDelegate ()
@@ -23,6 +24,11 @@
     [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelError];
     // [self setupTriggering];
     [MagicalRecord setupAutoMigratingCoreDataStack];
+    
+    DM_NHM_SharedInstance.beforeParseResponseBlock = ^(NSHTTPURLResponse *response, NSError *error, BOOL *shouldContinue) {
+        NSLog(@"pre send");
+        
+    };
     
     return YES;
 }

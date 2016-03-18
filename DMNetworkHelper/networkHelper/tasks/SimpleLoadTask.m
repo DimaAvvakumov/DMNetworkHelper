@@ -11,20 +11,24 @@
 @implementation SimpleLoadTask
 
 - (NSString *)relativePath {
-    return @"api/contacts";
+    return @"1.0/feed";
 }
 
 - (DMNetworkHelperTaskMethod)method {
     return DMNetworkHelperTaskMethod_GET;
 }
 
-- (NSString *)itemsKey {
-    return @"*";
+- (DMNetworkHelperResponseOptions)responseOptions {
+    return DMNetworkHelperResponseOptionJsonEmptyAvaliable | DMNetworkHelperResponseOptionResultIsArray;
 }
 
-- (id)parseItem:(NSDictionary *)itemInfo {
+- (NSString *)findByKey {
+    return @"result.items";
+}
+
+- (id)parseResponse {
     
-    return itemInfo;
+    return self.allItems;
 }
 
 @end

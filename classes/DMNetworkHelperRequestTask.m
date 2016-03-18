@@ -9,7 +9,6 @@
 // frameworks
 #import <StandardPaths/StandardPaths.h>
 #import <AFNetworking/AFNetworking.h>
-#import <MagicalRecord/MagicalRecord.h>
 
 #import "DMNetworkHelperRequestTask.h"
 
@@ -17,11 +16,23 @@
 
 #import "DMNetworkHelperManager.h"
 
-@interface DMNetworkHelperRequestTask () <DMNetworkHelperRequestTaskProtocol>
+@interface DMNetworkHelperRequestTask ()
+
+@property (copy, nonatomic) DMNetworkHelperRequestTaskFinishBlock finishBlock;
 
 @end
 
 @implementation DMNetworkHelperRequestTask
+
+#pragma mark - Start execution
+
+- (void)executeWithCompletitionBlock:(DMNetworkHelperRequestTaskFinishBlock)finishBlock {
+    self.finishBlock = finishBlock;
+    
+    [DM_NHM_SharedInstance addOperation:self];
+}
+
+#pragma mark - Implementation
 
 - (void)start {
     if ([self isCancelled]) {
@@ -62,23 +73,109 @@
             return;
         }
         
-        if (NO == error) {
-            [strongSelf afterSuccessResponse:(NSHTTPURLResponse *)response withObject:responseObject];
-        } else {
-            [strongSelf afterFailureResponse:(NSHTTPURLResponse *)response withError:error];
-        
-        }
+        [strongSelf afterExecutionWithResponse:(NSHTTPURLResponse *) response object:responseObject error:error];
     }];
     
     [dataTask resume];
 }
 
-- (void)afterSuccessResponse:(NSHTTPURLResponse *)response withObject:(id)responseObject {
+- (void)afterExecutionWithResponse:(NSHTTPURLResponse *)response object:(id)responseObject error:(NSError *)error {
+    
+    void(^beforeParseBlock)(NSHTTPURLResponse *response, NSError *error, BOOL *shouldContinue) = [DMNetworkHelperManager sharedInstance].beforeParseResponseBlock;
+    
+    if (beforeParseBlock) {
+        BOOL shouldContinue = YES;
+        
+        beforeParseBlock(response, error, &shouldContinue);
+        
+        if (shouldContinue == NO) {
+            
+            [self finish];
+            
+            return;
+        }
+    }
+    
+    // competition queue
+    dispatch_queue_t queue = self.completionQueue;
+    if (queue == NULL) {
+        queue = dispatch_get_main_queue();
+    }
+    
+    // check for error
+    if (error) {
+        if (_finishBlock) {
+            dispatch_async(queue, ^{
+                _finishBlock(nil, error);
+            });
+        }
+        
+        [self finish];
+    }
+    
+    // parse response
+    NSUInteger options = [self responseOptions];
+    NSString *key = [self findByKey];
+    
+    // store response
+    self.responseObject = responseObject;
+    
+    // check if empty not avaliable
+    if (!(options & DMNetworkHelperResponseOptionJsonEmptyAvaliable)) {
+        if (responseObject == nil) {
+            [self finishWithErrorCode:-1 message:@"Empty server response"];
+            
+            return;
+        }
+    }
+    
+    // check result as dictionary
+    if (options & DMNetworkHelperResponseOptionResultIsArray) {
+        
+        NSArray *rawItems = [self findInJson:responseObject byKey:key];
+        if (rawItems && [rawItems isKindOfClass:[NSArray class]]) {
+            self.allItems = rawItems;
+        }
+        
+    } else {
+        
+        NSDictionary *rawItem = [self findInJson:responseObject byKey:key];
+        if (rawItem && [rawItem isKindOfClass:[NSDictionary class]]) {
+            self.oneItem = rawItem;
+        }
+    }
+    
+    // middle processing
+    id result = [self parseResponse];
+    
+    if (_finishBlock) {
+        dispatch_sync(queue, ^{
+            _finishBlock(result, nil);
+        });
+    }
     
     [self finish];
+    
 }
 
-- (void)afterFailureResponse:(NSHTTPURLResponse *)response withError: (NSError *)error {
+
+
+- (void)finishWithErrorCode:(NSInteger)code message:(NSString *)message {
+    // competition queue
+    dispatch_queue_t queue = self.completionQueue;
+    if (queue == NULL) {
+        queue = dispatch_get_main_queue();
+    }
+    
+    // error
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: message, @"from": @"DMNetworkHelper" };
+    NSError *error = [NSError errorWithDomain:DM_NHM_SharedInstance.url code:code userInfo:userInfo];
+    
+    if (_finishBlock) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            _finishBlock(nil, error);
+        });
+    }
     
     [self finish];
 }

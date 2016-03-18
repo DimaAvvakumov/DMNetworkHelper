@@ -10,7 +10,6 @@
 
 // frameworks
 #import <StandardPaths/StandardPaths.h>
-#import <MagicalRecord/MagicalRecord.h>
 
 #import "DMNetworkHelperBasicTaskProtected.h"
 
