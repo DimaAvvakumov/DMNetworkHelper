@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DMNetworkHelper"
-  s.version      = "0.2.2"
+  s.version      = "1.0.0"
   s.summary      = "Helper for perform network requests"
   s.homepage     = "https://github.com/DimaAvvakumov/DMNetworkHelper.git"
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency 'AFNetworking', '> 3'
-  s.dependency 'MagicalRecord', '> 2'
+
 
 end

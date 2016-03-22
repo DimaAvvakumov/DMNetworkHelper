@@ -15,6 +15,8 @@
 
 @property (strong, nonatomic) NSString *url;
 
+@property (copy, nonatomic) void(^beforeParseResponseBlock)(NSHTTPURLResponse *response, NSError *error, BOOL *shouldContinue);
+
 // shared instance
 + (instancetype)sharedInstance;
 

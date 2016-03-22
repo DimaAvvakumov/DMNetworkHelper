@@ -14,6 +14,8 @@
 - (void) finish;
 - (NSString *) methodString;
 
+- (id)findInJson:(id)json byKey:(NSString *)key;
+
 @end
 
 @interface DMNetworkHelperBasicTask (Protected) <DMNetworkHelperBasicTaskProtected>

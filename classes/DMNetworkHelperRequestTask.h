@@ -8,13 +8,10 @@
 
 #import "DMNetworkHelperBasicTask.h"
 
-@protocol DMNetworkHelperRequestTaskProtocol <NSObject>
-
-- (void)afterSuccessResponse:(NSHTTPURLResponse *)response withObject:(id)responseObject;
-- (void)afterFailureResponse:(NSHTTPURLResponse *)response withError: (NSError *)error;
-
-@end
+typedef void (^DMNetworkHelperRequestTaskFinishBlock)(id result, NSError *error);
 
 @interface DMNetworkHelperRequestTask : DMNetworkHelperBasicTask
+
+- (void)executeWithCompletitionBlock:(DMNetworkHelperRequestTaskFinishBlock)finishBlock;
 
 @end

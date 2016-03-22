@@ -6,8 +6,8 @@
 //  Copyright © 2015 Dmitry Avvakumov. All rights reserved.
 //
 
-#import "DMNetworkHelperListTask.h"
+#import "DMNetworkHelper.h"
 
-@interface SimpleLoadTask : DMNetworkHelperListTask
+@interface SimpleLoadTask : DMNetworkHelperRequestTask
 
 @end

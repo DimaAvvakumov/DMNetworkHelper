@@ -9,7 +9,6 @@
 // frameworks
 #import <StandardPaths/StandardPaths.h>
 #import <AFNetworking/AFNetworking.h>
-#import <MagicalRecord/MagicalRecord.h>
 
 #import "DMNetworkHelperBasicTask.h"
 #import "DMNetworkHelperBasicTaskProtected.h"
@@ -20,8 +19,6 @@
     BOOL _isExecuting;
     BOOL _isFinished;
 }
-
-@property (strong, nonatomic) NSManagedObjectContext *localContext;
 
 @end
 
@@ -68,12 +65,12 @@
     return DMNetworkHelperTaskMethod_GET;
 }
 
-- (NSString *)itemsKey {
-    return @"items";
+- (NSString *)findByKey {
+    return @"*";
 }
 
-- (BOOL)databaseIsUsing {
-    return YES;
+- (DMNetworkHelperResponseOptions)responseOptions {
+    return 0;
 }
 
 - (id)parseItem:(NSDictionary *)itemInfo {
@@ -104,6 +101,32 @@
             return @"GET";
         }
     }
+}
+
+- (id)findInJson:(id)json byKey:(NSString *)key {
+    if ([key isEqualToString:@"*"]) {
+        return json;
+    }
+    
+    NSRange dotRange = [key rangeOfString:@"."];
+    NSDictionary *subDict = json;
+    while (dotRange.location != NSNotFound) {
+        // check for valid subDict
+        if (subDict == nil) break;
+        if (NO == [subDict isKindOfClass:[NSDictionary class]]) break;
+        
+        NSString *firstKey = [key substringToIndex:dotRange.location];
+        key = [key substringFromIndex:(dotRange.location + 1)];
+        
+        subDict = [subDict objectForKey:firstKey];
+        
+        dotRange = [key rangeOfString:@"."];
+    }
+    
+    if (subDict == nil) return nil;
+    if (NO == [subDict isKindOfClass:[NSDictionary class]]) return nil;
+    
+    return [subDict objectForKey:key];
 }
 
 @end

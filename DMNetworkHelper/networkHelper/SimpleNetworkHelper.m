@@ -10,7 +10,7 @@
 
 @implementation SimpleNetworkHelper
 
-- (NSOperation *) nh_simpleLoadWithFinishBlock:(DMNetworkHelperListTaskFinishBlock)finishBlock {
+- (NSOperation *) nh_simpleLoadWithFinishBlock:(DMNetworkHelperRequestTaskFinishBlock)finishBlock {
     
     SimpleLoadTask *task = [[SimpleLoadTask alloc] init];
     [task executeWithCompletitionBlock:finishBlock];

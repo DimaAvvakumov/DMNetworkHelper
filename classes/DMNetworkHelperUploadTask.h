@@ -8,13 +8,13 @@
 
 #import "DMNetworkHelperBasicTask.h"
 
-typedef void (^DMNetworkHelperUploadTaskFinishBlock)(_Nullable id item, NSError __autoreleasing * _Nullable  error, NSInteger statusCode);
+typedef void (^DMNetworkHelperUploadTaskFinishBlock)(id item, NSError *error);
 typedef void (^DMNetworkHelperProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
 
 @interface DMNetworkHelperUploadTask : DMNetworkHelperBasicTask
 
-@property (copy, nonatomic, nullable) void (^appendBlock)(id formData, NSError **error);
+@property (copy, nonatomic) void (^appendBlock)(id formData, NSError **error);
 
-- (void)executeWithProgressBlock:(DMNetworkHelperProgressBlock)progressBlock andCompletitionBlock:(_Nullable DMNetworkHelperUploadTaskFinishBlock)finishBlock;
+- (void)executeWithProgressBlock:(DMNetworkHelperProgressBlock)progressBlock andCompletitionBlock:(DMNetworkHelperUploadTaskFinishBlock)finishBlock;
 
 @end
