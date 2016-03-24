@@ -73,12 +73,8 @@
     return 0;
 }
 
-- (id)parseItem:(NSDictionary *)itemInfo {
-    return nil;
-}
-
-- (id)parseItem:(NSDictionary *)itemInfo inLocalContext:(NSManagedObjectContext *)localContext {
-    return nil;
+- (void)parseResponseWithFinishBlock:(void (^)(id))finishParseBlock {
+    finishParseBlock(nil);
 }
 
 #pragma mark - Helper

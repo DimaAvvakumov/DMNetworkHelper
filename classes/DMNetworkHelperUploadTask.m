@@ -184,8 +184,26 @@
         }
     }
     
+    // weak self
+    __weak typeof (self) weakSelf = self;
+    
     // middle processing
-    id result = [self parseResponse];
+    [self parseResponseWithFinishBlock:^(id result) {
+        typeof (weakSelf) strongSelf = weakSelf;
+        if (strongSelf == nil) return ;
+        
+        [strongSelf afterParsingResponseWithResult:result];
+    }];
+    
+}
+
+- (void)afterParsingResponseWithResult:(id)result {
+    
+    // competition queue
+    dispatch_queue_t queue = self.completionQueue;
+    if (queue == NULL) {
+        queue = dispatch_get_main_queue();
+    }
     
     if (_finishBlock) {
         dispatch_sync(queue, ^{

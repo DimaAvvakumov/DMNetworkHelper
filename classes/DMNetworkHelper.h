@@ -15,4 +15,7 @@
 #import "DMNetworkHelperDownloadTask.h"
 #import "DMNetworkHelperUploadTask.h"
 
+// categories
+#import "UIViewController+DMNetworkHelper.h"
+
 #endif /* DMNetworkHelper_h */

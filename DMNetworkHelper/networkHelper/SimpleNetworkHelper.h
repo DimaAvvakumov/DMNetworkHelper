@@ -13,6 +13,7 @@
 
 @protocol SimpleNetworkHelper <NSObject>
 
+@optional
 - (NSOperation *) nh_simpleLoadWithFinishBlock:(DMNetworkHelperRequestTaskFinishBlock)finishBlock;
 
 - (NSOperation *) nh_loadFileAtURL:(NSString *)url
