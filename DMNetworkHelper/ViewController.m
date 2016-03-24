@@ -8,15 +8,14 @@
 
 #import "ViewController.h"
 
-#import "DMNetworkHelperManager.h"
+// network helper
+#import "DMNetworkHelper.h"
 
 #import "SimpleNetworkHelper.h"
 
 #import "SettingsManager.h"
 
-@interface ViewController ()
-
-@property (strong, nonatomic) SimpleNetworkHelper *networkHelper;
+@interface ViewController () <SimpleNetworkHelper>
 
 @property (strong, nonatomic) NSOperation *operation;
 
@@ -40,8 +39,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.networkHelper = [SimpleNetworkHelper new];
-    
     self.protTextField.text = [SettingsManager defaultManager].serverProtocol;
     self.hostTextField.text = [SettingsManager defaultManager].serverHost;
     self.portTextField.text = [SettingsManager defaultManager].serverPort;
@@ -57,6 +54,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Network helper
+
+- (NSArray *)nh_listOfHelpers {
+    return @[ [SimpleNetworkHelper new] ];
 }
 
 - (IBAction)sendAction:(UIButton*)sender {
@@ -121,7 +124,7 @@
     // weak self
     __weak typeof (self) weakSelf = self;
     
-    self.operation = [self.networkHelper nh_simpleLoadWithFinishBlock:^(id result, NSError *error) {
+    self.operation = [self nh_simpleLoadWithFinishBlock:^(id result, NSError *error) {
         
         NSString *message;
         NSArray *items = result;
@@ -145,7 +148,7 @@
     
     NSString *fileURL = self.fileTextField.text;
     
-    self.operation = [self.networkHelper nh_loadFileAtURL:fileURL progressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+    self.operation = [self nh_loadFileAtURL:fileURL progressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
         
         NSLog(@"progress: %f", (float) totalBytesRead / totalBytesExpectedToRead);
     } withFinishBlock:^(NSString *filePath, NSError *error, NSInteger statusCode) {
