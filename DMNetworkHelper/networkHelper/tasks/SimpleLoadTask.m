@@ -26,9 +26,9 @@
     return @"result.items";
 }
 
-- (id)parseResponse {
+- (void)parseResponseWithFinishBlock:(void (^)(id))finishParseBlock {
     
-    return self.allItems;
+    finishParseBlock( self.allItems );
 }
 
 @end
