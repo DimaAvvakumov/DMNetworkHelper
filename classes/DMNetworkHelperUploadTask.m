@@ -206,7 +206,7 @@
     }
     
     if (_finishBlock) {
-        dispatch_sync(queue, ^{
+        dispatch_async(queue, ^{
             _finishBlock(result, nil);
         });
     }
