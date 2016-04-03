@@ -150,6 +150,8 @@
         }
         
         [self finish];
+        
+        return;
     }
     
     // parse response
