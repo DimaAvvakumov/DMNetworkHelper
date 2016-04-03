@@ -73,8 +73,8 @@
     return 0;
 }
 
-- (void)parseResponseWithFinishBlock:(void (^)(id))finishParseBlock {
-    finishParseBlock(nil);
+- (void)parseResponseWithFinishBlock:(void (^)(id result, NSError *error))finishParseBlock {
+    finishParseBlock(nil, nil);
 }
 
 #pragma mark - Helper

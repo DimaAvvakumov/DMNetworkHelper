@@ -63,7 +63,7 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
 
 - (NSString *)findByKey;
 
-- (void)parseResponseWithFinishBlock:(void(^)(id result))finishParseBlock;
+- (void)parseResponseWithFinishBlock:(void(^)(id result, NSError *error))finishParseBlock;
 
 
 @end

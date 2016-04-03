@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DMNetworkHelper"
-  s.version      = "1.1.2"
+  s.version      = "1.2.0"
   s.summary      = "Helper for perform network requests"
   s.homepage     = "https://github.com/DimaAvvakumov/DMNetworkHelper.git"
   s.license      = { :type => "MIT", :file => "LICENSE" }

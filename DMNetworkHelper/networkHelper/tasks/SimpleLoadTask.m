@@ -26,9 +26,9 @@
     return @"result.items";
 }
 
-- (void)parseResponseWithFinishBlock:(void (^)(id))finishParseBlock {
+- (void)parseResponseWithFinishBlock:(void (^)(id, NSError *error))finishParseBlock {
     
-    finishParseBlock( self.allItems );
+    finishParseBlock( self.allItems, nil );
 }
 
 @end

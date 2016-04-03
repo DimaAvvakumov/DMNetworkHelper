@@ -149,16 +149,16 @@
     __weak typeof (self) weakSelf = self;
     
     // middle processing
-    [self parseResponseWithFinishBlock:^(id result) {
+    [self parseResponseWithFinishBlock:^(id result, NSError *error) {
         typeof (weakSelf) strongSelf = weakSelf;
         if (strongSelf == nil) return ;
         
-        [strongSelf afterParsingResponseWithResult:result];
+        [strongSelf afterParsingResponseWithResult:result orError:error];
     }];
     
 }
 
-- (void)afterParsingResponseWithResult:(id)result {
+- (void)afterParsingResponseWithResult:(id)result orError:(NSError *)error {
     
     // competition queue
     dispatch_queue_t queue = self.completionQueue;
@@ -168,7 +168,7 @@
     
     if (_finishBlock) {
         dispatch_async(queue, ^{
-            _finishBlock(result, nil);
+            _finishBlock(result, error);
         });
     }
     
