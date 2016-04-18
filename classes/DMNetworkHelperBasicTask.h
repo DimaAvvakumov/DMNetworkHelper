@@ -30,6 +30,9 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
     
     /** Check result as dictionary */
     DMNetworkHelperResponseOptionResultIsDictionary = 1 << 2,
+    
+    /** Check result as html */
+    DMNetworkHelperResponseOptionResultIsHTML = 1 << 3,
 
 };
 
@@ -58,6 +61,7 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
 
 @property (strong, nonatomic) NSArray *allItems;
 @property (strong, nonatomic) NSDictionary *oneItem;
+@property (strong, nonatomic) NSString *htmlItem;
 
 - (DMNetworkHelperResponseOptions)responseOptions;
 

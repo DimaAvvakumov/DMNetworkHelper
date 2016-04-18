@@ -41,6 +41,9 @@
         return;
     }
     
+    // response options
+    NSUInteger options = [self responseOptions];
+    
     // performing request
     AFHTTPSessionManager *manager = [DMNetworkHelperManager sharedInstance].sessionManager;
     
@@ -53,6 +56,20 @@
         requestSerializer = [AFHTTPRequestSerializer serializer];
         
         manager.requestSerializer = requestSerializer;
+    }
+    
+    // check for html
+    if (options & DMNetworkHelperResponseOptionResultIsHTML) {
+        manager = [manager copy];
+        
+        requestSerializer = [AFHTTPRequestSerializer serializer];
+        // [requestSerializer setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
+        
+        AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+        [responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html", nil]];
+        
+        manager.requestSerializer = requestSerializer;
+        manager.responseSerializer = responseSerializer;
     }
     
     NSString *requestURL = [self absolutePath];
@@ -122,30 +139,41 @@
     // store response
     self.responseObject = responseObject;
     
-    // check if empty not avaliable
-    if (!(options & DMNetworkHelperResponseOptionJsonEmptyAvaliable)) {
-        if (responseObject == nil) {
-            [self finishWithErrorCode:-1 message:@"Empty server response"];
-            
-            return;
-        }
-    }
-    
-    // check result as dictionary
-    if (options & DMNetworkHelperResponseOptionResultIsArray) {
+    // check for html
+    if (options & DMNetworkHelperResponseOptionResultIsHTML) {
         
-        NSArray *rawItems = [self findInJson:responseObject byKey:key];
-        if (rawItems && [rawItems isKindOfClass:[NSArray class]]) {
-            self.allItems = rawItems;
-        }
+        NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        
+        self.htmlItem = html;
         
     } else {
         
-        NSDictionary *rawItem = [self findInJson:responseObject byKey:key];
-        if (rawItem && [rawItem isKindOfClass:[NSDictionary class]]) {
-            self.oneItem = rawItem;
+        // check if empty not avaliable
+        if (!(options & DMNetworkHelperResponseOptionJsonEmptyAvaliable)) {
+            if (responseObject == nil) {
+                [self finishWithErrorCode:-1 message:@"Empty server response"];
+                
+                return;
+            }
+        }
+        
+        // check result as dictionary
+        if (options & DMNetworkHelperResponseOptionResultIsArray) {
+            
+            NSArray *rawItems = [self findInJson:responseObject byKey:key];
+            if (rawItems && [rawItems isKindOfClass:[NSArray class]]) {
+                self.allItems = rawItems;
+            }
+            
+        } else {
+            
+            NSDictionary *rawItem = [self findInJson:responseObject byKey:key];
+            if (rawItem && [rawItem isKindOfClass:[NSDictionary class]]) {
+                self.oneItem = rawItem;
+            }
         }
     }
+
     
     // weak self
     __weak typeof (self) weakSelf = self;
