@@ -23,7 +23,8 @@
                    withFinishBlock:(DMNetworkHelperDownloadTaskFinishBlock)finishBlock {
     
     FileLoadTask *task = [[FileLoadTask alloc] init];
-    task.url = url;
+    
+    task.params = @{@"url": url};
     
     [task executeWithProgressBlock:progressBlock andCompletitionBlock:finishBlock];
     

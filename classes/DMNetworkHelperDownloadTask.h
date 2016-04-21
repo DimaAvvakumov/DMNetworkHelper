@@ -8,12 +8,10 @@
 
 #import "DMNetworkHelperBasicTask.h"
 
-typedef void (^DMNetworkHelperDownloadTaskFinishBlock)(NSString *filePath, NSError *error, NSInteger statusCode);
+typedef void (^DMNetworkHelperDownloadTaskFinishBlock)(NSString *filePath, NSError *error);
 typedef void (^DMNetworkHelperProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
 
 @interface DMNetworkHelperDownloadTask : DMNetworkHelperBasicTask
-
-@property (strong, nonatomic) NSString *url;
 
 - (void)executeWithProgressBlock:(DMNetworkHelperProgressBlock)progressBlock andCompletitionBlock:(DMNetworkHelperDownloadTaskFinishBlock)finishBlock;
 

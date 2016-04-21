@@ -151,7 +151,7 @@
     self.operation = [self nh_loadFileAtURL:fileURL progressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
         
         NSLog(@"progress: %f", (float) totalBytesRead / totalBytesExpectedToRead);
-    } withFinishBlock:^(NSString *filePath, NSError *error, NSInteger statusCode) {
+    } withFinishBlock:^(NSString *filePath, NSError *error) {
         
         NSString *message;
         
@@ -163,7 +163,7 @@
         
         weakSelf.textView.text = message;
         
-        NSLog(@"Status code: %d", (int) statusCode);
+        // NSLog(@"Status code: %d", (int) statusCode);
     }];
 }
 

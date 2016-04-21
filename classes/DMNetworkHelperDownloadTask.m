@@ -54,7 +54,10 @@
         manager.requestSerializer = requestSerializer;
     }
     
-    NSString *requestURL = self.url;
+    NSString *requestURL = [self absolutePath];
+    if (requestURL == nil) {
+        requestURL = [DM_NHM_SharedInstance requestURLByAppendPath:[self relativePath]];
+    }
     
     NSString *method = [self methodString];
     
@@ -97,11 +100,14 @@
 
 - (void)afterSuccessResponse:(NSHTTPURLResponse *)response withTmpFile:(NSString *)tmpPath {
     
-    NSInteger statusCode = response.statusCode;
-    
     NSString *filePath = [self afterDownloadTempFile:tmpPath withResponse:response];
     if (filePath == nil) {
-        filePath = [self canonizeFilePath:self.url];
+        NSString *requestURL = [self absolutePath];
+        if (requestURL == nil) {
+            requestURL = [DM_NHM_SharedInstance requestURLByAppendPath:[self relativePath]];
+        }
+        
+        filePath = [self canonizeFilePath:requestURL];
         
         NSString *fullPath = [[NSFileManager defaultManager] pathForCacheFile:filePath];
         
@@ -121,7 +127,7 @@
                 
                 if (_finishBlock) {
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        _finishBlock(nil, error, statusCode);
+                        _finishBlock(nil, error);
                     });
                 }
                 
@@ -143,7 +149,7 @@
                 
                 if (_finishBlock) {
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        _finishBlock(nil, error, statusCode);
+                        _finishBlock(nil, error);
                     });
                 }
                 
@@ -166,7 +172,7 @@
             
             if (_finishBlock) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    _finishBlock(nil, error, statusCode);
+                    _finishBlock(nil, error);
                 });
             }
             
@@ -179,7 +185,7 @@
     
     if (_finishBlock) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            _finishBlock(filePath, nil, statusCode);
+            _finishBlock(filePath, nil);
         });
     }
     
@@ -188,11 +194,9 @@
 
 - (void)afterFailureResponse:(NSHTTPURLResponse *)response withError:(NSError *)error {
     
-    NSInteger statusCode = response.statusCode;
-    
     if (_finishBlock) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            _finishBlock(nil, error, statusCode);
+            _finishBlock(nil, error);
         });
     }
     

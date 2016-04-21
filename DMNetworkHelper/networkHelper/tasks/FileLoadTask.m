@@ -10,6 +10,10 @@
 
 @implementation FileLoadTask
 
+- (NSString *)absolutePath {
+    return [self.params objectForKey:@"url"];
+}
+
 - (DMNetworkHelperTaskMethod)method {
     return DMNetworkHelperTaskMethod_GET;
 }
