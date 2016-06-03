@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class NSManagedObjectContext;
+@class NSManagedObjectContext, AFHTTPRequestSerializer;
 
 typedef enum {
     DMNetworkHelperTaskMethod_GET,
@@ -44,6 +44,11 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
  The dispatch queue for `completionBlock`. If `NULL` (default), the main queue is used.
  */
 @property (nonatomic, strong) dispatch_queue_t completionQueue;
+
+/**
+ Custom request serializer for current task
+ */
+@property (nonatomic, strong) AFHTTPRequestSerializer *requestSerializer;
 
 /**
  * Request params

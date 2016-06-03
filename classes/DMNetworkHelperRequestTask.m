@@ -50,8 +50,12 @@
     // result queue
     manager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
-    // request serializer
-    AFHTTPRequestSerializer *requestSerializer = manager.requestSerializer;
+    // local request serializer
+    AFHTTPRequestSerializer *requestSerializer = self.requestSerializer;
+    if (requestSerializer == nil) {
+        requestSerializer = manager.requestSerializer;
+    }
+    // shared request serializer
     if (requestSerializer == nil) {
         requestSerializer = [AFHTTPRequestSerializer serializer];
         
