@@ -141,6 +141,7 @@
     NSString *key = [self findByKey];
     
     // store response
+    self.response = response;
     self.responseObject = responseObject;
     
     // check for html

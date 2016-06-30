@@ -62,6 +62,7 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
  * Response params
  *
  */
+@property (strong, nonatomic) NSURLResponse *response;
 @property (strong, nonatomic) id responseObject;
 
 @property (strong, nonatomic) NSArray *allItems;
