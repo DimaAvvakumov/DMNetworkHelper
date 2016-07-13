@@ -175,9 +175,14 @@
         }
     }
     
-    // check result as dictionary
-    if (options & DMNetworkHelperResponseOptionResultIsArray) {
+    // check for empty result
+    if (responseObject == nil) {
         
+        self.allItems = nil;
+        self.oneItem = nil;
+        
+    } else if (options & DMNetworkHelperResponseOptionResultIsArray) {
+        // check result as dictionary
         NSArray *rawItems = [self findInJson:responseObject byKey:key];
         if (rawItems && [rawItems isKindOfClass:[NSArray class]]) {
             self.allItems = rawItems;
