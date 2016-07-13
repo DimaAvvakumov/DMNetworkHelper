@@ -104,14 +104,15 @@
 
 - (void)afterSuccessResponse:(NSHTTPURLResponse *)response withTmpFile:(NSString *)tmpPath {
     
-    NSString *filePath = [self afterDownloadTempFile:tmpPath withResponse:response];
-    if (filePath == nil) {
+    id downloadResult = [self afterDownloadTempFile:tmpPath withResponse:response];
+    
+    if ([downloadResult isKindOfClass:[NSNull class]]) {
         NSString *requestURL = [self absolutePath];
         if (requestURL == nil) {
             requestURL = [DM_NHM_SharedInstance requestURLByAppendPath:[self relativePath]];
         }
         
-        filePath = [self canonizeFilePath:requestURL];
+        NSString *filePath = [self canonizeFilePath:requestURL];
         
         NSString *fullPath = [[NSFileManager defaultManager] pathForCacheFile:filePath];
         
@@ -185,11 +186,23 @@
             return;
         }
         
+        // store file path to result
+        downloadResult = filePath;
+    }
+    
+    NSError *error = nil;
+    if (downloadResult == nil) {
+        NSDictionary *userInfo = @{
+                                   NSLocalizedDescriptionKey: @"File download error",
+                                   @"response": response
+                                   };
+        
+        error = [NSError errorWithDomain:@"custom" code:-1 userInfo:userInfo];
     }
     
     if (_finishBlock) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            _finishBlock(filePath, nil);
+            _finishBlock(downloadResult, error);
         });
     }
     
@@ -207,7 +220,7 @@
     [self finish];
 }
 
-- (NSString *)afterDownloadTempFile:(NSString *)tmpFilePath withResponse:(NSHTTPURLResponse *)response {
+- (id)afterDownloadTempFile:(NSString *)tmpFilePath withResponse:(NSHTTPURLResponse *)response {
     
     return nil;
 }

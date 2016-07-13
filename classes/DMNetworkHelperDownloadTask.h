@@ -8,7 +8,7 @@
 
 #import "DMNetworkHelperBasicTask.h"
 
-typedef void (^DMNetworkHelperDownloadTaskFinishBlock)(NSString *filePath, NSError *error);
+typedef void (^DMNetworkHelperDownloadTaskFinishBlock)(id downloadResult, NSError *error);
 typedef void (^DMNetworkHelperProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
 
 @interface DMNetworkHelperDownloadTask : DMNetworkHelperBasicTask
