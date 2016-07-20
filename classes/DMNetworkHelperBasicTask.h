@@ -13,7 +13,8 @@
 typedef enum {
     DMNetworkHelperTaskMethod_GET,
     DMNetworkHelperTaskMethod_PUT,
-    DMNetworkHelperTaskMethod_POST
+    DMNetworkHelperTaskMethod_POST,
+    DMNetworkHelperTaskMethod_DELETE
 } DMNetworkHelperTaskMethod;
 
 /**
