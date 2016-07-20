@@ -93,6 +93,9 @@
         case DMNetworkHelperTaskMethod_POST: {
             return @"POST";
         }
+        case DMNetworkHelperTaskMethod_DELETE: {
+            return @"DELETE";
+        }
         default: {
             return @"GET";
         }
