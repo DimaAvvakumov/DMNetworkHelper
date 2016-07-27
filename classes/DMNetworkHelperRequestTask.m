@@ -41,6 +41,18 @@
         return;
     }
     
+    // check for mock settings
+    BOOL isMock = self.isMock;
+    if (isMock) {
+        NSTimeInterval duration = [self mockRequestDuration];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self performMockRequest];
+        });
+        
+        return;
+    }
+    
     // response options
     NSUInteger options = [self responseOptions];
     
@@ -98,6 +110,23 @@
     }];
     
     [dataTask resume];
+}
+
+- (void)performMockRequest {
+    NSString *filePath = [self mockResponseFilePath];
+    NSArray *allItems = [NSArray arrayWithContentsOfFile:filePath];
+    NSDictionary *oneItem = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    
+    if ([allItems isKindOfClass:[NSArray class]]) {
+        [self afterExecutionWithResponse:nil object:allItems error:nil];
+    } else if ([oneItem isKindOfClass:[NSDictionary class]]) {
+        [self afterExecutionWithResponse:nil object:oneItem error:nil];
+    } else {
+        
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: @"Mock file doos not exist" };
+        NSError *error = [NSError errorWithDomain:@"DMNetworkHelperMockDomain" code:-1 userInfo:userInfo];
+        [self afterExecutionWithResponse:nil object:nil error:error];
+    }
 }
 
 - (void)afterExecutionWithResponse:(NSHTTPURLResponse *)response object:(id)responseObject error:(NSError *)error {

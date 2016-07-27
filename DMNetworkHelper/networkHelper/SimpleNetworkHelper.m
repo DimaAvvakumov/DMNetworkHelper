@@ -12,7 +12,15 @@
 
 - (NSOperation *) nh_simpleLoadWithFinishBlock:(DMNetworkHelperRequestTaskFinishBlock)finishBlock {
     
+    // create
     SimpleLoadTask *task = [[SimpleLoadTask alloc] init];
+    
+    // mock
+#ifdef MOCK_ENVIROMENT
+    task.isMock = YES;
+#endif
+    
+    // execute
     [task executeWithCompletitionBlock:finishBlock];
     
     return task;

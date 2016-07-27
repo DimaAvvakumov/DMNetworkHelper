@@ -22,6 +22,7 @@
 		1844BB2A1C2043BA00DB2030 /* FileLoadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB271C2043BA00DB2030 /* FileLoadTask.m */; };
 		1844BB2B1C2043BA00DB2030 /* SimpleLoadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844BB291C2043BA00DB2030 /* SimpleLoadTask.m */; };
 		18B8D4101CA4303800D6239B /* UIViewController+DMNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8D40F1CA4303800D6239B /* UIViewController+DMNetworkHelper.m */; };
+		18DB2F381D48AABC00396D26 /* SimpleLoadTaskMock.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18DB2F371D48AABC00396D26 /* SimpleLoadTaskMock.plist */; };
 		18F233C81C5B6C3A0070DACD /* DMNetworkHelperUploadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F233C71C5B6C3A0070DACD /* DMNetworkHelperUploadTask.m */; };
 		24034B5CF0EAA5703D0E1A4D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37691D469C1F8D9B1DC4E18F /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		18696C2C1C9BE92500D17CDE /* DMNetworkHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelper.h; sourceTree = "<group>"; };
 		18B8D40E1CA4303800D6239B /* UIViewController+DMNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DMNetworkHelper.h"; sourceTree = "<group>"; };
 		18B8D40F1CA4303800D6239B /* UIViewController+DMNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DMNetworkHelper.m"; sourceTree = "<group>"; };
+		18DB2F371D48AABC00396D26 /* SimpleLoadTaskMock.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SimpleLoadTaskMock.plist; sourceTree = "<group>"; };
 		18F233C61C5B6C3A0070DACD /* DMNetworkHelperUploadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetworkHelperUploadTask.h; sourceTree = "<group>"; };
 		18F233C71C5B6C3A0070DACD /* DMNetworkHelperUploadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNetworkHelperUploadTask.m; sourceTree = "<group>"; };
 		37691D469C1F8D9B1DC4E18F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 		1842C5D81C0F0A6400E6D6EE /* networkHelper */ = {
 			isa = PBXGroup;
 			children = (
+				18DB2F361D48AAB000396D26 /* mocks */,
 				1844BB251C2043B100DB2030 /* tasks */,
 				1842C5DC1C0F0AA600E6D6EE /* SimpleNetworkHelper.h */,
 				1842C5DD1C0F0AA600E6D6EE /* SimpleNetworkHelper.m */,
@@ -170,6 +173,14 @@
 				1844BB291C2043BA00DB2030 /* SimpleLoadTask.m */,
 			);
 			path = tasks;
+			sourceTree = "<group>";
+		};
+		18DB2F361D48AAB000396D26 /* mocks */ = {
+			isa = PBXGroup;
+			children = (
+				18DB2F371D48AABC00396D26 /* SimpleLoadTaskMock.plist */,
+			);
+			path = mocks;
 			sourceTree = "<group>";
 		};
 		56F3B76E64A2CD79A75EFBEE /* Pods */ = {
@@ -250,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1842C5CA1C0EFF5300E6D6EE /* LaunchScreen.storyboard in Resources */,
+				18DB2F381D48AABC00396D26 /* SimpleLoadTaskMock.plist in Resources */,
 				1842C5C71C0EFF5300E6D6EE /* Assets.xcassets in Resources */,
 				1842C5C51C0EFF5300E6D6EE /* Main.storyboard in Resources */,
 			);
@@ -433,6 +445,11 @@
 			baseConfigurationReference = A4EA70375CAED812688C91ED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"_MOCK_ENVIROMENT=1",
+				);
 				INFOPLIST_FILE = DMNetworkHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.dima.avvakumov.DMNetworkHelper;

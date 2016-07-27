@@ -77,6 +77,16 @@
     finishParseBlock(nil, nil);
 }
 
+#pragma mark - Mock
+
+- (NSTimeInterval)mockRequestDuration {
+    return 3.0;
+}
+
+- (NSString *)mockResponseFilePath {
+    return @"";
+}
+
 #pragma mark - Helper
 
 - (NSString *)methodString {

@@ -8,6 +8,8 @@
 
 #import "SimpleLoadTask.h"
 
+#import <StandardPaths/StandardPaths.h>
+
 @implementation SimpleLoadTask
 
 - (NSString *)relativePath {
@@ -29,6 +31,12 @@
 - (void)parseResponseWithFinishBlock:(void (^)(id, NSError *error))finishParseBlock {
     
     finishParseBlock( self.allItems, nil );
+}
+
+#pragma mark - Mock section
+
+- (NSString *)mockResponseFilePath {
+    return [[NSFileManager defaultManager] pathForResource:@"SimpleLoadTaskMock.plist"];
 }
 
 @end

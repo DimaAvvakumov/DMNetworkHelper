@@ -52,12 +52,24 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
 @property (nonatomic, strong) AFHTTPRequestSerializer *requestSerializer;
 
 /**
+ Use as mock request
+ */
+@property (nonatomic, assign) BOOL isMock;
+
+/**
  * Request params
  *
  */
 - (NSString *)absolutePath;
 - (NSString *)relativePath;
 - (DMNetworkHelperTaskMethod) method;
+
+/**
+ * Default mock settings
+ *
+ */
+- (NSTimeInterval)mockRequestDuration;
+- (NSString *)mockResponseFilePath;
 
 /**
  * Response params
