@@ -152,8 +152,11 @@
         queue = dispatch_get_main_queue();
     }
     
+    // response options
+    NSUInteger options = [self responseOptions];
+    
     // check for error
-    if (error) {
+    if (error && !(options & DMNetworkHelperResponseOptionPassServerError)) {
         if (_finishBlock) {
             dispatch_async(queue, ^{
                 _finishBlock(nil, error);
@@ -166,12 +169,12 @@
     }
     
     // parse response
-    NSUInteger options = [self responseOptions];
     NSString *key = [self findByKey];
     
     // store response
     self.response = response;
     self.responseObject = responseObject;
+    self.statusCode = response.statusCode;
     
     // check for html
     if (options & DMNetworkHelperResponseOptionResultIsHTML) {

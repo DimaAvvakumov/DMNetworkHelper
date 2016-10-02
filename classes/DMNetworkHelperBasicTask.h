@@ -34,6 +34,9 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
     
     /** Check result as html */
     DMNetworkHelperResponseOptionResultIsHTML = 1 << 3,
+    
+    /** Pass response with server error */
+    DMNetworkHelperResponseOptionPassServerError = 1 << 4,
 
 };
 
@@ -77,6 +80,7 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
  */
 @property (strong, nonatomic) NSURLResponse *response;
 @property (strong, nonatomic) id responseObject;
+@property (assign, nonatomic) NSInteger statusCode;
 
 @property (strong, nonatomic) NSArray *allItems;
 @property (strong, nonatomic) NSDictionary *oneItem;
