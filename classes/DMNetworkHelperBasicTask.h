@@ -86,6 +86,8 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
 @property (strong, nonatomic) NSDictionary *oneItem;
 @property (strong, nonatomic) NSString *htmlItem;
 
+@property (strong, nonatomic) NSError *responseError;
+
 - (DMNetworkHelperResponseOptions)responseOptions;
 
 - (NSString *)findByKey;

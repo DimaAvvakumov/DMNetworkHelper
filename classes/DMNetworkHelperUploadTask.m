@@ -168,6 +168,7 @@
     self.response = response;
     self.responseObject = responseObject;
     self.statusCode = response.statusCode;
+    self.responseError = error;
     
     // check if empty not avaliable
     if (!(options & DMNetworkHelperResponseOptionJsonEmptyAvaliable)) {

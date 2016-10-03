@@ -175,6 +175,7 @@
     self.response = response;
     self.responseObject = responseObject;
     self.statusCode = response.statusCode;
+    self.responseError = error;
     
     // check for html
     if (options & DMNetworkHelperResponseOptionResultIsHTML) {
