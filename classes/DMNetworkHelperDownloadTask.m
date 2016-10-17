@@ -99,6 +99,8 @@
         }
     }];
     
+    self.dataTask = dataTask;
+    
     [dataTask resume];
 }
 

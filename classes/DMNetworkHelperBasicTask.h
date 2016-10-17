@@ -74,6 +74,8 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
 - (NSTimeInterval)mockRequestDuration;
 - (NSString *)mockResponseFilePath;
 
+@property (weak, nonatomic) NSURLSessionTask *dataTask;
+
 /**
  * Response params
  *

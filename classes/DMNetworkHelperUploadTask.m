@@ -120,6 +120,8 @@
         [strongSelf afterResponse:(NSHTTPURLResponse *)response withObject:responseObject error:error];
     }];
     
+    self.dataTask = dataTask;
+    
     [dataTask resume];
 }
 

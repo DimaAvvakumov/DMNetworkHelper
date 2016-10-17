@@ -109,6 +109,8 @@
         [strongSelf afterExecutionWithResponse:(NSHTTPURLResponse *) response object:responseObject error:error];
     }];
     
+    self.dataTask = dataTask;
+    
     [dataTask resume];
 }
 

@@ -138,4 +138,15 @@
     return [subDict objectForKey:key];
 }
 
+#pragma mark - Cancelling
+
+- (void)cancel {
+    [super cancel];
+    
+    NSURLSessionTask *task = self.dataTask;
+    if (task) {
+        [task cancel];
+    }
+}
+
 @end

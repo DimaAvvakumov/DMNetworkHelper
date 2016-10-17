@@ -234,7 +234,8 @@
 				TargetAttributes = {
 					1842C5B61C0EFF5300E6D6EE = {
 						CreatedOnToolsVersion = 7.1.1;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = QULEAG7CAN;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -450,7 +451,8 @@
 			baseConfigurationReference = A4EA70375CAED812688C91ED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = QULEAG7CAN;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -468,7 +470,8 @@
 			baseConfigurationReference = FD5C952F61B10BCD48CA9097 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = QULEAG7CAN;
 				INFOPLIST_FILE = DMNetworkHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.dima.avvakumov.DMNetworkHelper;
