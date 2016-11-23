@@ -106,7 +106,34 @@
 
 - (void)afterSuccessResponse:(NSHTTPURLResponse *)response withTmpFile:(NSString *)tmpPath {
     
-    id downloadResult = [self afterDownloadTempFile:tmpPath withResponse:response];
+    self.response = response;
+    self.statusCode = response.statusCode;
+    
+    // weak self
+    __weak typeof (self) weakSelf = self;
+    
+    [self afterDownloadTempFile:tmpPath withFinishBlock:^(id result, NSError *error) {
+        typeof (weakSelf) strongSelf = weakSelf;
+        if (strongSelf == nil) return ;
+        
+        [strongSelf afterProcessTmpFile:tmpPath withResut:result error:error];
+    }];
+    
+}
+
+- (void)afterProcessTmpFile:(NSString *)tmpPath withResut:(id)downloadResult error:(NSError *)error {
+    
+    if (error) {
+        if (_finishBlock) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _finishBlock(nil, error);
+            });
+        }
+        
+        [self finish];
+        
+        return;
+    }
     
     if ([downloadResult isKindOfClass:[NSNull class]]) {
         NSString *requestURL = [self absolutePath];
@@ -132,8 +159,10 @@
                     error = [NSError errorWithDomain:@"custom" code:-1 userInfo:userInfo];
                 }
                 
+                [self cleanTmpFile:tmpPath];
+                
                 if (_finishBlock) {
-                    dispatch_sync(dispatch_get_main_queue(), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
                         _finishBlock(nil, error);
                     });
                 }
@@ -154,8 +183,10 @@
                     error = [NSError errorWithDomain:@"custom" code:-1 userInfo:userInfo];
                 }
                 
+                [self cleanTmpFile:tmpPath];
+                
                 if (_finishBlock) {
-                    dispatch_sync(dispatch_get_main_queue(), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
                         _finishBlock(nil, error);
                     });
                 }
@@ -177,8 +208,10 @@
                 error = [NSError errorWithDomain:@"custom" code:-1 userInfo:userInfo];
             }
             
+            [self cleanTmpFile:tmpPath];
+            
             if (_finishBlock) {
-                dispatch_sync(dispatch_get_main_queue(), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
                     _finishBlock(nil, error);
                 });
             }
@@ -192,29 +225,43 @@
         downloadResult = filePath;
     }
     
-    NSError *error = nil;
+    /* clear tmp */
+    [self cleanTmpFile:tmpPath];
+    
     if (downloadResult == nil) {
+        NSError *error = nil;
         NSDictionary *userInfo = @{
                                    NSLocalizedDescriptionKey: @"File download error",
-                                   @"response": response
+                                   @"response": self.response
                                    };
         
         error = [NSError errorWithDomain:@"custom" code:-1 userInfo:userInfo];
-    }
-    
-    if (_finishBlock) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            _finishBlock(downloadResult, error);
-        });
+        
+        if (_finishBlock) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _finishBlock(downloadResult, error);
+            });
+        }
+    } else {
+        if (_finishBlock) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _finishBlock(downloadResult, nil);
+            });
+        }
     }
     
     [self finish];
 }
 
+- (void)cleanTmpFile:(NSString *)tmpFile {
+    NSError *error;
+    [[NSFileManager defaultManager] removeItemAtPath:tmpFile error:&error];
+}
+
 - (void)afterFailureResponse:(NSHTTPURLResponse *)response withError:(NSError *)error {
     
     if (_finishBlock) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             _finishBlock(nil, error);
         });
     }
@@ -222,9 +269,9 @@
     [self finish];
 }
 
-- (id)afterDownloadTempFile:(NSString *)tmpFilePath withResponse:(NSHTTPURLResponse *)response {
+- (void)afterDownloadTempFile:(NSString *)tmpFilePath withFinishBlock:(void(^)(id result, NSError *error))finishParseBlock {
     
-    return nil;
+    finishParseBlock( nil, nil );
 }
 
 - (NSString *)canonizeFilePath:(NSString *)filePath {
