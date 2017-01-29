@@ -46,17 +46,33 @@
     // result queue
     manager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
-    // local request serializer
+    /* request serialiser block */
     AFHTTPRequestSerializer *requestSerializer = self.requestSerializer;
+    if (requestSerializer == nil) {
+        requestSerializer = [DMNetworkHelperManager sharedInstance].requestSerializer;
+    }
     if (requestSerializer == nil) {
         requestSerializer = manager.requestSerializer;
     }
-    // shared request serializer
     if (requestSerializer == nil) {
         requestSerializer = [AFHTTPRequestSerializer serializer];
-        
-        manager.requestSerializer = requestSerializer;
     }
+    
+    /* response serialiser */
+    AFHTTPResponseSerializer *responseSerializer = self.responseSerializer;
+    if (responseSerializer == nil) {
+        responseSerializer = [DMNetworkHelperManager sharedInstance].responseSerializer;
+    }
+    if (responseSerializer == nil) {
+        responseSerializer = manager.responseSerializer;
+    }
+    if (responseSerializer == nil) {
+        responseSerializer = [AFHTTPResponseSerializer serializer];
+    }
+    
+    /* set request serialiser to manager */
+    manager.requestSerializer = requestSerializer;
+    manager.responseSerializer = responseSerializer;
     
     NSString *requestURL = [self absolutePath];
     if (requestURL == nil) {
