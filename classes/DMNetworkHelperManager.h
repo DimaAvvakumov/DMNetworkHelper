@@ -28,4 +28,10 @@
 
 - (NSString *)requestURLByAppendPath:(NSString *)path;
 
+#pragma mark - Shared request serializer
+@property (strong, nonatomic) AFHTTPRequestSerializer *requestSerializer;
+
+#pragma mark - Shared responce serializer
+@property (strong, nonatomic) AFHTTPResponseSerializer *responseSerializer;
+
 @end

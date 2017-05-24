@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class NSManagedObjectContext, AFHTTPRequestSerializer;
+@class NSManagedObjectContext, AFHTTPRequestSerializer, AFHTTPResponseSerializer;
 
 typedef enum {
     DMNetworkHelperTaskMethod_GET,
@@ -53,6 +53,11 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
  Custom request serializer for current task
  */
 @property (nonatomic, strong) AFHTTPRequestSerializer *requestSerializer;
+
+/**
+ Custom response serializer for current task
+ */
+@property (nonatomic, strong) AFHTTPResponseSerializer *responseSerializer;
 
 /**
  Use as mock request
