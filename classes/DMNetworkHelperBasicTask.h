@@ -66,6 +66,7 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
 - (NSString *)absolutePath;
 - (NSString *)relativePath;
 - (DMNetworkHelperTaskMethod) method;
+- (NSTimeInterval)timeoutInterval;
 
 /**
  * Default mock settings

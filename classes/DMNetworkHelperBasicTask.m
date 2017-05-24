@@ -65,6 +65,10 @@
     return DMNetworkHelperTaskMethod_GET;
 }
 
+- (NSTimeInterval)timeoutInterval {
+    return 0.0;
+}
+
 - (NSString *)findByKey {
     return @"*";
 }
