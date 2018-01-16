@@ -53,6 +53,10 @@
 
 #pragma mark - Default
 
+- (NSString *)apiEndpoint {
+    return nil;
+}
+
 - (NSString *)absolutePath {
     return nil;
 }
@@ -67,6 +71,14 @@
 
 - (NSTimeInterval)timeoutInterval {
     return 0.0;
+}
+
+- (NSString *)buildRequestURLString {
+    if (self.apiEndpoint == nil) return nil;
+    
+    NSString *apiEndpoint = self.apiEndpoint;
+    NSString *path = [self relativePath];
+    return [NSString stringWithFormat:@"%@/%@", apiEndpoint, path];
 }
 
 - (NSString *)findByKey {

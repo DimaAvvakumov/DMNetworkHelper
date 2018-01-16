@@ -68,10 +68,13 @@ typedef NS_ENUM (NSUInteger, DMNetworkHelperResponseOptions)
  * Request params
  *
  */
+- (NSString *)apiEndpoint;
 - (NSString *)absolutePath;
 - (NSString *)relativePath;
 - (DMNetworkHelperTaskMethod) method;
 - (NSTimeInterval)timeoutInterval;
+
+- (NSString *)buildRequestURLString;
 
 /**
  * Default mock settings

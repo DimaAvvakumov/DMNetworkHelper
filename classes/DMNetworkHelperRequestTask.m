@@ -102,6 +102,9 @@
     
     NSString *requestURL = [self absolutePath];
     if (requestURL == nil) {
+        requestURL = [self buildRequestURLString];
+    }
+    if (requestURL == nil) {
         requestURL = [DM_NHM_SharedInstance requestURLByAppendPath:[self relativePath]];
     }
     
